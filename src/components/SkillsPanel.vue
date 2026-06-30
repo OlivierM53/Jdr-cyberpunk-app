@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
 import { SKILLS, STAT_DEFS, type Stat } from '@/data/cyberpunk'
+import InfoTooltip from '@/components/InfoTooltip.vue'
 
 const store = useCharacterStore()
 const skillStat = ref('ALL')
@@ -17,11 +18,11 @@ const skillList = computed(() => {
     ([name, st]) =>
       (skillStat.value === 'ALL' || st === skillStat.value) &&
       (!q || name.toLowerCase().includes(q)),
-  ).map(([name, st]) => {
+  ).map(([name, st, description]) => {
     const base = store.char.stats[st] || 0
     const level = store.char.skills[name] || 0
     return {
-      name, statKey: st, base, level, total: base + level
+      name, statKey: st, base, level, total: base + level, description,
     }
   })
 })
@@ -58,9 +59,10 @@ const skillList = computed(() => {
         <span
           class="w-[34px] flex-none border border-line py-0.5 text-center font-mono text-[10px] font-bold text-accent-2">{{
             sk.statKey }}</span>
-        <span class="flex-1 font-display text-[13px] leading-tight font-medium text-txt">{{
-          sk.name
-        }}</span>
+        <span class="flex flex-1 items-center gap-1.5 font-display text-[13px] leading-tight font-medium text-txt">
+          {{ sk.name }}
+          <InfoTooltip :text="sk.description" />
+        </span>
         <span class="font-mono text-[11px] text-dim" title="base de stat">{{ sk.base }}</span>
         <span class="font-mono text-[11px] text-dim">+</span>
         <button

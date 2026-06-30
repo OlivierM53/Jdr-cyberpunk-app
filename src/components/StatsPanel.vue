@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCharacterStore } from '@/stores/character'
 import { STAT_DEFS } from '@/data/cyberpunk'
+import InfoTooltip from '@/components/InfoTooltip.vue'
 
 const store = useCharacterStore()
 </script>
@@ -28,7 +29,10 @@ const store = useCharacterStore()
         class="border border-line bg-black/25 p-3 pb-3.5"
       >
         <div class="flex items-baseline justify-between">
-          <span class="font-mono text-lg font-bold tracking-[0.05em] text-accent">{{ d.key }}</span>
+          <span class="flex items-center gap-1.5">
+            <span class="font-mono text-lg font-bold tracking-[0.05em] text-accent">{{ d.key }}</span>
+            <InfoTooltip :text="d.description" />
+          </span>
           <span class="font-display text-[30px] leading-none font-bold text-txt">{{
             store.char.stats[d.key]
           }}</span>
