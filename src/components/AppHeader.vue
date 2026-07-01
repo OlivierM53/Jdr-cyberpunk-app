@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useCharacterStore } from '@/stores/character'
 import { ACCENTS, type AccentName } from '@/data/cyberpunk'
 
 const store = useCharacterStore()
+const route = useRoute()
 
 const accentList = Object.keys(ACCENTS) as AccentName[]
 const importInput = ref<HTMLInputElement | null>(null)
@@ -69,6 +71,29 @@ async function onImportChange(e: Event) {
           FICHE OPÉRATEUR // PROTOCOLE NEON-DIST
         </div>
       </div>
+    </div>
+
+    <div class="flex border border-line">
+      <RouterLink
+        to="/character"
+        class="cursor-pointer px-4 py-2 font-display text-[11px] font-semibold tracking-[0.16em] uppercase"
+        :class="
+          route.path === '/character'
+            ? 'bg-accent-soft text-accent'
+            : 'text-dim hover:text-accent'
+        "
+      >
+        Fiche
+      </RouterLink>
+      <RouterLink
+        to="/lore"
+        class="cursor-pointer border-l border-line px-4 py-2 font-display text-[11px] font-semibold tracking-[0.16em] uppercase"
+        :class="
+          route.path === '/lore' ? 'bg-accent-soft text-accent' : 'text-dim hover:text-accent'
+        "
+      >
+        Lore
+      </RouterLink>
     </div>
 
     <div class="flex-1"></div>

@@ -191,14 +191,4 @@ onBeforeUnmount(() => {
       );
     "
   ></div>
-  <div
-    class="pointer-events-none fixed inset-0 z-[9998]"
-    style="
-      background: radial-gradient(
-        ellipse 120% 80% at 50% 0%,
-        transparent 55%,
-        rgba(0, 0, 0, 0.55) 100%
-      );
-    "
-  ></div>
 </template>
