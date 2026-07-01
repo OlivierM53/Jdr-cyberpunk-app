@@ -10,9 +10,13 @@ let ctx: CanvasRenderingContext2D | null = null
 let raf = 0
 let cols = 0
 let drops: number[] = []
-let nodes: { x: number; y: number; ph: number }[] = []
-let edges: { a: number; b: number }[] = []
-let pulses: { e: number; t: number; s: number }[] = []
+type NetNode = { x: number; y: number; r: number; ph: number; tier: 'core' | 'mid' | 'small' }
+type Segment = { ax: number; ay: number; bx: number; by: number; width: number; alpha: number }
+
+let netNodes: NetNode[] = []
+let segments: Segment[] = []
+let segmentWeights: number[] = []
+let pulses: { seg: number; t: number; s: number }[] = []
 let t = 0
 let hackColor = ACCENTS.cyan.a
 
@@ -26,6 +30,14 @@ watch(
   { immediate: true },
 )
 
+watch(
+  () => store.bgMode,
+  () => {
+    const cv = canvas.value
+    if (cv && ctx) ctx.clearRect(0, 0, cv.width, cv.height)
+  },
+)
+
 function setup() {
   const cv = canvas.value
   if (!cv || !ctx) return
@@ -35,29 +47,144 @@ function setup() {
   cols = Math.floor(cv.width / 14)
   drops = Array.from({ length: cols }, () => Math.random() * -60)
 
-  const n = Math.max(26, Math.round((cv.width * cv.height) / 15000))
-  nodes = Array.from({ length: n }, () => ({
-    x: Math.random() * cv.width,
-    y: Math.random() * cv.height,
-    ph: Math.random() * Math.PI * 2,
+  buildNetwork(cv)
+}
+
+type NodeDef = { xPct: number; yPct: number; r: number }
+
+// Positions fixes (% de la largeur/hauteur du canvas) - noeuds moyens collés aux bords.
+const MID_LEFT: NodeDef[] = [
+  { xPct: 4, yPct: 9, r: 11 },
+  { xPct: 9, yPct: 24, r: 8 },
+  { xPct: 5, yPct: 39, r: 12 },
+  { xPct: 10, yPct: 55, r: 9 },
+  { xPct: 5, yPct: 71, r: 10 },
+  { xPct: 9, yPct: 88, r: 8 },
+]
+const MID_RIGHT: NodeDef[] = [
+  { xPct: 96, yPct: 7, r: 10 },
+  { xPct: 91, yPct: 22, r: 9 },
+  { xPct: 95, yPct: 37, r: 12 },
+  { xPct: 90, yPct: 53, r: 8 },
+  { xPct: 95, yPct: 69, r: 11 },
+  { xPct: 91, yPct: 86, r: 9 },
+]
+const MID_LEFT_COMPACT: NodeDef[] = [
+  { xPct: 6, yPct: 14, r: 9 },
+  { xPct: 8, yPct: 41, r: 10 },
+  { xPct: 5, yPct: 67, r: 8 },
+  { xPct: 9, yPct: 90, r: 9 },
+]
+const MID_RIGHT_COMPACT: NodeDef[] = [
+  { xPct: 94, yPct: 12, r: 9 },
+  { xPct: 92, yPct: 39, r: 10 },
+  { xPct: 95, yPct: 65, r: 8 },
+  { xPct: 91, yPct: 87, r: 9 },
+]
+const MID_BOTTOM: NodeDef[] = [
+  { xPct: 28, yPct: 96, r: 9 },
+  { xPct: 50, yPct: 98, r: 12 },
+  { xPct: 72, yPct: 96, r: 9 },
+]
+const MID_BOTTOM_COMPACT: NodeDef[] = [
+  { xPct: 35, yPct: 97, r: 9 },
+  { xPct: 65, yPct: 97, r: 9 },
+]
+
+// Connexions moyen-moyen, en indices dans le tableau [...gauche, ...droite, ...bas].
+const MID_LINKS: [number, number][] = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+  [6, 7],
+  [8, 9],
+  [10, 11],
+  [0, 6],
+  [12, 13],
+  [13, 14],
+  [5, 12],
+  [11, 14],
+]
+const MID_LINKS_COMPACT: [number, number][] = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+  [6, 7],
+  [0, 4],
+  [8, 9],
+  [3, 8],
+  [7, 9],
+]
+const SMALL_ANGLE_OFFSETS = [-0.35, 0.35]
+const EXIT_ANGLE_OFFSETS = [-0.25, 0.25]
+
+function buildNetwork(cv: HTMLCanvasElement) {
+  const w = cv.width
+  const h = cv.height
+  const cx = w / 2
+  const cy = h / 2
+  const compact = w < 700
+  const minDim = Math.min(w, h)
+
+  netNodes = []
+  segments = []
+
+  const coreR = Math.min(Math.max(minDim * 0.045, 22), 40)
+  netNodes.push({ x: cx, y: cy, r: coreR, ph: 0, tier: 'core' })
+
+  const leftDefs = compact ? MID_LEFT_COMPACT : MID_LEFT
+  const rightDefs = compact ? MID_RIGHT_COMPACT : MID_RIGHT
+  const bottomDefs = compact ? MID_BOTTOM_COMPACT : MID_BOTTOM
+  const links = compact ? MID_LINKS_COMPACT : MID_LINKS
+
+  const midNodes: NetNode[] = [...leftDefs, ...rightDefs, ...bottomDefs].map((def, i) => ({
+    x: (def.xPct / 100) * w,
+    y: (def.yPct / 100) * h,
+    r: def.r,
+    ph: i * 0.9,
+    tier: 'mid',
   }))
-  edges = []
-  for (let i = 0; i < n; i++) {
-    const current = nodes[i]
-    if (!current) continue
-    const near = nodes
-      .map((node, j) => ({ j, d: (node.x - current.x) ** 2 + (node.y - current.y) ** 2 }))
-      .filter((o) => o.j !== i)
-      .sort((a, b) => a.d - b.d)
-      .slice(0, 2)
-    near.forEach((o) => {
-      if (!edges.some((e) => (e.a === o.j && e.b === i) || (e.a === i && e.b === o.j))) {
-        edges.push({ a: i, b: o.j })
-      }
-    })
+  for (const node of midNodes) {
+    netNodes.push(node)
+    segments.push({ ax: cx, ay: cy, bx: node.x, by: node.y, width: 3, alpha: 0.45 })
   }
-  pulses = Array.from({ length: Math.round(edges.length * 0.45) }, () => ({
-    e: Math.floor(Math.random() * edges.length),
+
+  for (const [a, b] of links) {
+    const na = midNodes[a]
+    const nb = midNodes[b]
+    if (na && nb) segments.push({ ax: na.x, ay: na.y, bx: nb.x, by: nb.y, width: 2, alpha: 0.3 })
+  }
+
+  const smallDist = minDim * 0.05
+  midNodes.forEach((mid, idx) => {
+    const outAngle = Math.atan2(mid.y - cy, mid.x - cx)
+    SMALL_ANGLE_OFFSETS.forEach((offset, oi) => {
+      const angle = outAngle + offset
+      const sx = mid.x + Math.cos(angle) * smallDist
+      const sy = mid.y + Math.sin(angle) * smallDist
+      const sNode: NetNode = { x: sx, y: sy, r: 3, ph: idx + oi * 1.3, tier: 'small' }
+      netNodes.push(sNode)
+      segments.push({ ax: mid.x, ay: mid.y, bx: sx, by: sy, width: 1, alpha: 0.2 })
+
+      const exitDist = Math.max(w, h)
+      EXIT_ANGLE_OFFSETS.forEach((eOff) => {
+        const exitAngle = angle + eOff
+        const ex = sx + Math.cos(exitAngle) * exitDist
+        const ey = sy + Math.sin(exitAngle) * exitDist
+        segments.push({ ax: sx, ay: sy, bx: ex, by: ey, width: 1, alpha: 0.15 })
+      })
+    })
+  })
+
+  segmentWeights = []
+  segments.forEach((s, idx) => {
+    const weight = s.width >= 3 ? 4 : s.width >= 2 ? 2 : 1
+    for (let k = 0; k < weight; k++) segmentWeights.push(idx)
+  })
+
+  const pulseCount = Math.round(segments.length * 0.5)
+  pulses = Array.from({ length: pulseCount }, () => ({
+    seg: segmentWeights[Math.floor(Math.random() * segmentWeights.length)] ?? 0,
     t: Math.random(),
     s: 0.006 + Math.random() * 0.024,
   }))
@@ -105,45 +232,44 @@ function drawGrid() {
   t += 0.05
 
   ctx.strokeStyle = hackColor
-  ctx.lineWidth = 1
-  ctx.globalAlpha = 0.09
-  ctx.beginPath()
-  for (const e of edges) {
-    const a = nodes[e.a]
-    const b = nodes[e.b]
-    if (!a || !b) continue
-    ctx.moveTo(a.x, a.y)
-    ctx.lineTo(b.x, b.y)
+  ctx.lineCap = 'round'
+  for (const s of segments) {
+    ctx.globalAlpha = s.alpha
+    ctx.lineWidth = s.width
+    ctx.beginPath()
+    ctx.moveTo(s.ax, s.ay)
+    ctx.lineTo(s.bx, s.by)
+    ctx.stroke()
   }
-  ctx.stroke()
   ctx.globalAlpha = 1
+  ctx.lineWidth = 1
 
-  for (const n of nodes) {
-    const a = 0.28 + 0.22 * Math.sin(t + n.ph)
-    ctx.globalAlpha = a
-    ctx.fillStyle = hackColor
-    ctx.fillRect(n.x - 1.5, n.y - 1.5, 3, 3)
+  ctx.fillStyle = hackColor
+  for (const n of netNodes) {
+    const baseAlpha = n.tier === 'core' ? 0.55 : n.tier === 'mid' ? 0.35 : 0.22
+    const amp = n.tier === 'core' ? 0.12 : n.tier === 'small' ? 0.08 : 0.2
+    ctx.globalAlpha = baseAlpha + amp * Math.sin(t + n.ph)
+    ctx.shadowColor = hackColor
+    ctx.shadowBlur = n.tier === 'core' ? 24 : n.tier === 'mid' ? 8 : 0
+    ctx.beginPath()
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2)
+    ctx.fill()
   }
+  ctx.shadowBlur = 0
   ctx.globalAlpha = 1
 
   ctx.shadowColor = hackColor
   for (const p of pulses) {
-    const e = edges[p.e]
-    if (!e) {
-      p.t = 1
-      continue
-    }
-    const a = nodes[e.a]
-    const b = nodes[e.b]
-    if (!a || !b) continue
-    const x = a.x + (b.x - a.x) * p.t
-    const y = a.y + (b.y - a.y) * p.t
+    const s = segments[p.seg]
+    if (!s) continue
+    const x = s.ax + (s.bx - s.ax) * p.t
+    const y = s.ay + (s.by - s.ay) * p.t
     ctx.shadowBlur = 8
     ctx.fillStyle = Math.random() < 0.4 ? '#ffffff' : hackColor
     ctx.fillRect(x - 2, y - 2, 4, 4)
     p.t += p.s
     if (p.t > 1) {
-      p.e = Math.floor(Math.random() * edges.length)
+      p.seg = segmentWeights[Math.floor(Math.random() * segmentWeights.length)] ?? 0
       p.t = 0
       p.s = 0.006 + Math.random() * 0.024
     }
