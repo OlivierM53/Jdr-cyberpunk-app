@@ -35,7 +35,7 @@ function setup() {
   cols = Math.floor(cv.width / 14)
   drops = Array.from({ length: cols }, () => Math.random() * -60)
 
-  const n = Math.max(26, Math.round((cv.width * cv.height) / 42000))
+  const n = Math.max(26, Math.round((cv.width * cv.height) / 15000))
   nodes = Array.from({ length: n }, () => ({
     x: Math.random() * cv.width,
     y: Math.random() * cv.height,

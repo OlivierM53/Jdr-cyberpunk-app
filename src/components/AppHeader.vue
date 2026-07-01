@@ -1,14 +1,49 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
 import { ACCENTS, type AccentName } from '@/data/cyberpunk'
 
 const store = useCharacterStore()
 
 const accentList = Object.keys(ACCENTS) as AccentName[]
+const importInput = ref<HTMLInputElement | null>(null)
 
 function onReset() {
   if (!confirm('Réinitialiser toute la fiche ? Cette action est irréversible.')) return
   store.reset()
+}
+
+function onExport() {
+  const json = store.exportCharacter()
+  const slug = (store.char.alias || store.char.nom || 'personnage')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `fiche-${slug || 'personnage'}.json`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+function onImportClick() {
+  importInput.value?.click()
+}
+
+async function onImportChange(e: Event) {
+  const input = e.target as HTMLInputElement
+  const file = input.files?.[0]
+  input.value = ''
+  if (!file) return
+  try {
+    store.importCharacter(await file.text())
+  } catch {
+    alert('Ce fichier ne contient pas une fiche de personnage JSON valide.')
+  }
 }
 </script>
 
@@ -69,6 +104,29 @@ function onReset() {
         ></span>
       </button>
     </div>
+
+    <button
+      title="Exporter la fiche en fichier JSON"
+      class="cursor-pointer border border-line bg-transparent px-3 py-2 font-mono text-[11px] font-semibold tracking-[0.12em] text-dim hover:border-accent hover:text-accent"
+      @click="onExport"
+    >
+      Exporter
+    </button>
+
+    <button
+      title="Importer une fiche depuis un fichier JSON"
+      class="cursor-pointer border border-line bg-transparent px-3 py-2 font-mono text-[11px] font-semibold tracking-[0.12em] text-dim hover:border-accent hover:text-accent"
+      @click="onImportClick"
+    >
+      Importer
+    </button>
+    <input
+      ref="importInput"
+      type="file"
+      accept="application/json,.json"
+      hidden
+      @change="onImportChange"
+    />
 
     <button
       class="cursor-pointer border border-line bg-transparent px-[14px] py-2 font-display text-[11px] font-semibold tracking-[0.18em] text-dim uppercase hover:border-accent-2 hover:text-accent-2"

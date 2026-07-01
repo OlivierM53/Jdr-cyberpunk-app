@@ -225,6 +225,18 @@ export const useCharacterStore = defineStore('character', () => {
     Object.assign(char, defaultCharacter())
   }
 
+  function exportCharacter() {
+    return JSON.stringify(char, null, 2)
+  }
+
+  function importCharacter(json: string) {
+    const parsed = JSON.parse(json)
+    if (!parsed || typeof parsed !== 'object') {
+      throw new Error('Le fichier ne contient pas une fiche de personnage valide.')
+    }
+    Object.assign(char, defaultCharacter(), parsed)
+  }
+
   return {
     char,
     accent,
@@ -259,5 +271,7 @@ export const useCharacterStore = defineStore('character', () => {
     applyAccent,
     toggleBgMode,
     reset,
+    exportCharacter,
+    importCharacter,
   }
 })

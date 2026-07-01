@@ -24,7 +24,7 @@ onMounted(() => store.applyAccent(store.accent))
   <HackBackground />
   <IntroOverlay />
 
-  <div class="relative z-1 mx-auto max-w-335 px-6 pt-5.5 pb-20">
+    <div class="relative z-1 mx-auto max-w-335 px-6 pt-5.5 pb-20">
     <AppHeader />
 
     <div class="mb-4.5 grid grid-cols-[248px_1fr_312px] gap-4.5">
