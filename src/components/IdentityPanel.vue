@@ -1,25 +1,25 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useCharacterStore } from '@/stores/character'
-import { GENDERS, ROLES } from '@/data/cyberpunk'
+import { GENDERS, ROLES, ROLE_KEYS, type RoleKey } from '@/data/cyberpunk'
 
 const store = useCharacterStore()
 
 const roleSummary = computed(() => {
-  const role = ROLES.find((r) => r.key === store.char.role)
-  return role?.summary ?? 'Sélectionnez un rôle pour afficher le résumé de la classe.'
+  const role = ROLES[store.char.role as RoleKey]
+  return role?.description ?? 'Sélectionnez un rôle pour afficher le résumé de la classe.'
 })
 
 function onRoleChange(e: Event) {
   const select = e.target as HTMLSelectElement
   const newRole = select.value
   const previousRole = store.char.role
-  const roleDef = ROLES.find((r) => r.key === newRole)
+  const roleDef = ROLES[newRole as RoleKey]
   if (roleDef && newRole !== previousRole) {
     const applyDefaults = confirm(
-      `Appliquer les statistiques par défaut du rôle ${newRole} ? Annuler pour conserver les statistiques actuelles.`,
+      `Appliquer les statistiques et compétences par défaut du rôle ${newRole} ? Annuler pour conserver les valeurs actuelles.`,
     )
-    if (applyDefaults) store.applyRoleStats(newRole)
+    if (applyDefaults) store.applyRoleDefaults(newRole)
   }
   store.char.role = newRole
 }
@@ -71,7 +71,7 @@ function onRoleChange(e: Event) {
           @change="onRoleChange"
         >
           <option value="">—</option>
-          <option v-for="r in ROLES" :key="r.key" :value="r.key">{{ r.key }}</option>
+          <option v-for="key in ROLE_KEYS" :key="key" :value="key">{{ key }}</option>
         </select>
       </label>
       <label class="block">
