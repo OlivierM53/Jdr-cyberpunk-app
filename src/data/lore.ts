@@ -7,6 +7,8 @@ export interface LoreCard {
   badge: string;
   description: string;
   footer?: string;
+  /** Chemin relatif dans public/ (sans slash initial), ex. "corpo/arasaka.webp" */
+  logo?: string;
 }
 
 export interface LoreSection {
@@ -65,6 +67,7 @@ export const LORE_TABS: LoreTab[] = [
             "Fondée au Japon, Arasaka est l'une des corpos les plus puissantes et influentes du monde, dominant l'armement militaire, la banque et la sécurité — au point que certains disent qu'elle protège jusqu'à ton âme.",
           footer:
             "Actrice principale de la 4ème guerre des corpos, rivale historique de Militech.",
+          logo: "corpo/arasaka.webp",
         },
         {
           name: "Militech",
@@ -73,6 +76,7 @@ export const LORE_TABS: LoreTab[] = [
             "Propriété des NUSA, Militech leur sert de bras armé officieux et fournit une grande partie de son armement militaire.",
           footer:
             "Actrice principale de la 4ème guerre des corpos, aux côtés d’Arasaka.",
+          logo: "corpo/Militech.webp",
         },
         {
           name: "Trauma Team",
@@ -81,18 +85,21 @@ export const LORE_TABS: LoreTab[] = [
             "Trauma Team propose des abonnements d'urgence médicale : sans souscription active (ou sans moyen de payer sur l'instant), l'équipe n'intervient pas, quelle que soit la gravité.",
           footer:
             "À Night City, se faire soigner est une question de contrat, pas d'éthique.",
+          logo: "corpo/trauma-team.webp",
         },
         {
           name: "All Food",
           badge: "Agro-alimentaire",
           description:
             "Corporation mexicaine spécialisée dans l'agro-alimentaire, elle fournit l'essentiel de la viande consommée à Night City.",
+          logo: "corpo/All-food.webp",
         },
         {
           name: "Biotechnica",
           badge: "Génie génétique · Carburant",
           description:
             "Biotechnica domine le génie génétique appliqué aux animaux ainsi que la production de CHOOH2, le carburant de synthèse qui fait tourner la planète.",
+          logo: "corpo/biotechnica.webp",
         },
         {
           name: "Delamain",
@@ -101,6 +108,7 @@ export const LORE_TABS: LoreTab[] = [
             "Delamain exploite un réseau de taxis privés autonomes, avec des offres blindées et armées pour les trajets à risque.",
           footer:
             "N'emploie plus personne : une unique IA gère toute la flotte.",
+          logo: "corpo/delamain.webp",
         },
         {
           name: "NetWatch",
@@ -108,6 +116,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "NetWatch se présente comme une ONG chargée de surveiller le Net ; elle a érigé le Mur Noir dans les années 2040 et s’est engagée à empêcher quiconque de le franchir.",
           footer: "Ressemble à une ONG plus qu'à une corpo classique.",
+          logo: "corpo/netwatch.jpg",
         },
       ],
     },
@@ -127,6 +136,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Le 6th Street se présente comme une police de substitution au NCPD et estime que Night City devrait redevenir américaine.",
           footer: "Ex-militaires · milice patriotique",
+          logo: "gang/6th_Street.webp",
         },
         {
           name: "Animals",
@@ -134,6 +144,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Les Animals ne jurent que par la force humaine : ils se dopent au « Jus », une drogue qui gonfle muscle et puissance physique.",
           footer: "Bioscult · combats clandestins",
+          logo: "gang/Animals.webp",
         },
         {
           name: "Désosseurs",
@@ -141,6 +152,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Gang ultra-violent qui n'accorde aucune valeur à la vie humaine : les Désosseurs kidnappent pour arracher les implants de leurs victimes et les revendre, sans se soucier de leur survie.",
           footer: "Kidnapping · marché noir du cyberware",
+          logo: "gang/Scavs.webp",
         },
         {
           name: "Maelstrom",
@@ -149,6 +161,7 @@ export const LORE_TABS: LoreTab[] = [
             "Pour le Maelstrom, seul le chrome compte : ils s'implantent (ou forcent les autres à s'implanter) en masse, et consomment du CHOOH2 comme drogue.",
           footer:
             "Cyberware extrême · très grand nombre de cas de cyberpsychose",
+          logo: "gang/Maelstrom.webp",
         },
         {
           name: "Mox",
@@ -156,6 +169,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Peu nombreux, les Mox protègent celles et ceux qui travaillent dans le sexe et peuvent gérer certains établissements, sans jamais les exploiter.",
           footer: "Petit effectif, mais respecté",
+          logo: "gang/Moxes.webp",
         },
         {
           name: "Tyger Claws",
@@ -163,6 +177,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Les Tyger Claws tiennent l’essentiel des jeux d’argent de la ville, avec un fonctionnement et une taille proches d’une véritable corpo.",
           footer: "Organisation quasi-corporatiste",
+          logo: "gang/Tyger_Claw.webp",
         },
         {
           name: "Valentinos",
@@ -170,6 +185,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Gang des gosses de rue au très grand nombre de membres mais individuellement peu redoutables, les Valentinos cultivent une forte imagerie chrétienne.",
           footer: "Grand nombre · imagerie religieuse",
+          logo: "gang/Valentinos.webp",
         },
         {
           name: "Voodoo Boys",
@@ -177,6 +193,7 @@ export const LORE_TABS: LoreTab[] = [
           description:
             "Repliés en autarcie à Pacifica, les Voodoo Boys sont considérés comme les meilleurs hackers de la ville, spécialisés dans le netrunning.",
           footer: "Netrunning · autarcie",
+          logo: "gang/Voodoo_Boys.webp",
         },
       ],
     },
@@ -225,7 +242,7 @@ export const LORE_TABS: LoreTab[] = [
     content: {
       kind: "nightcity",
       histoire: [
-        "Construite par Mr Night sur la côte Ouest des USA, fondée via la corpo Night Corp, début 2020, profitant de la faiblesse des USA",
+        "Construite par Mr Night sur la côte Ouest des USA, fondée via la corpo Night Corp, début 2000, profitant de la faiblesse des USA",
         "Devait être un havre de paix et de luxe pour les riches, est devenue un repère pour les gangs violents, les corpos à la recherche de puissance et de pouvoir, et les politiques corrompus",
         "En 2069, les NUSA commencent la guerre d'unification, forçant beaucoup d'anciens états à rejoindre les NUSA",
         "Les NUSA essayent de récupérer Night City via la force avec Militech, mais NC passe un contrat avec Arasaka pour défendre la ville",
@@ -343,7 +360,7 @@ export const LORE_TABS: LoreTab[] = [
     content: {
       kind: "timeline",
       entries: [
-        { year: "—", event: "Effondrement des USA" },
+        { year: "1996", event: "Effondrement des USA" },
         {
           year: "1998",
           event: "Sécheresse transformant une partie de la planète en désert",

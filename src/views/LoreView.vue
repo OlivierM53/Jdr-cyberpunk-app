@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { LORE_TABS } from '@/data/lore'
+import { assetUrl } from '@/utils/asset'
 import LoreCardGrid from '@/components/LoreCardGrid.vue'
 import LoreSectionList from '@/components/LoreSectionList.vue'
 import LoreDefinitionList from '@/components/LoreDefinitionList.vue'
@@ -45,14 +46,28 @@ const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value)
   />
 
   <template v-else-if="active.content.kind === 'nightcity'">
+    <div class="relative  border border-line bg-panel p-6">
+      <div :class="active.accent === 'accent2' ? 'edge-accent-2' : 'edge-accent'"></div>
+      <h3
+        class="mb-2 font-display text-sm font-bold tracking-[0.12em] uppercase"
+        :class="active.accent === 'accent2' ? 'text-accent-2' : 'text-accent'"
+      >
+        La ville
+      </h3>
+      <div class="flex gap-10">
+        <img
+        :src="assetUrl('night-city.webp')"
+        alt="Night City"
+        class="mb-5 w-1/2 border border-line object-cover"
+        />
+        <LoreDefinitionList title="Districts" :entries="active.content.districts" :accent="active.accent" />
+      </div>
+    </div>
     <LoreSectionList
+    class="mt-4.5"
       :sections="[{ heading: 'Histoire', items: active.content.histoire }]"
       :accent="active.accent"
     />
-    <div class="relative mt-4.5 border border-line bg-panel p-6">
-      <div :class="active.accent === 'accent2' ? 'edge-accent-2' : 'edge-accent'"></div>
-      <LoreDefinitionList title="Districts" :entries="active.content.districts" :accent="active.accent" />
-    </div>
     <LoreSectionList
       class="mt-4.5"
       :sections="[{ heading: 'Trivia', items: active.content.trivia }]"

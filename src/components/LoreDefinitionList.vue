@@ -9,7 +9,7 @@ defineProps<{ entries: LoreDefinition[]; accent: LoreAccent; title?: string }>()
     <h3 v-if="title" class="mb-3 font-mono text-[10px] tracking-[0.2em] text-dim uppercase">
       {{ title }}
     </h3>
-    <div class="grid grid-cols-2 gap-x-5 gap-y-3">
+    <div class="grid gap-x-5 gap-y-3 grid-cols-[repeat(auto-fit,minmax(500px,1fr))]">
       <div
         v-for="entry in entries"
         :key="entry.term"
