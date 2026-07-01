@@ -1,6 +1,6 @@
 import { computed, reactive, ref, watch } from 'vue'
 import { defineStore } from 'pinia'
-import { ACCENTS, STAT_DEFS, SKILLS, type AccentName } from '@/data/cyberpunk'
+import { ACCENTS, STAT_DEFS, SKILLS, ROLES, type AccentName } from '@/data/cyberpunk'
 
 const STORAGE_KEY = 'cyber-chargen-v1'
 
@@ -26,6 +26,7 @@ export interface Equipment {
 
 export interface Character {
   nom: string
+  genre: string
   alias: string
   role: string
   origine: string
@@ -51,6 +52,7 @@ function defaultCharacter(): Character {
   SKILLS.forEach(([name]) => (skills[name] = 0))
   return {
     nom: '',
+    genre: '',
     alias: '',
     role: '',
     origine: '',
@@ -135,6 +137,11 @@ export const useCharacterStore = defineStore('character', () => {
 
   function setStat(key: string, delta: number) {
     char.stats[key] = Math.max(1, Math.min(10, (char.stats[key] || 0) + delta))
+  }
+
+  function applyRoleStats(roleKey: string) {
+    const role = ROLES.find((r) => r.key === roleKey)
+    if (role) Object.assign(char.stats, role.defaultStats)
   }
 
   function setSkill(name: string, delta: number) {
@@ -249,6 +256,7 @@ export const useCharacterStore = defineStore('character', () => {
     humanityPct,
     idCode,
     setStat,
+    applyRoleStats,
     setSkill,
     setHp,
     fullHeal,

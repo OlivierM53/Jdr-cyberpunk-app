@@ -317,6 +317,62 @@ export const BG_FIELDS: BgFieldDef[] = [
   { key: "amour", label: "Tragédie amoureuse" },
 ];
 
+export type Gender = "homme" | "femme" | "autre";
+
+export interface GenderDef {
+  key: Gender;
+  label: string;
+}
+
+export const GENDERS: GenderDef[] = [
+  { key: "homme", label: "Homme" },
+  { key: "femme", label: "Femme" },
+  { key: "autre", label: "Autre" },
+];
+
+export type RoleKey =
+  | "Netrunner"
+  | "Solo"
+  | "MedTech"
+  | "Techie"
+  | "Fixer"
+  | "Rockeur"
+  | "Pilote";
+
+export interface RoleDef {
+  key: RoleKey;
+  summary: string;
+  defaultStats: Record<Stat, number>;
+}
+
+// TODO: stats par défaut et résumé propres à chaque rôle - valeurs à fournir plus tard.
+const placeholderRoleStats = (): Record<Stat, number> => ({
+  COR: 5,
+  REF: 5,
+  DEX: 5,
+  TECH: 5,
+  INT: 5,
+  VOL: 5,
+  PRES: 5,
+  EMP: 5,
+  CHA: 5,
+  MOUV: 5,
+});
+
+export const ROLES: RoleDef[] = [
+  "Netrunner",
+  "Solo",
+  "MedTech",
+  "Techie",
+  "Fixer",
+  "Rockeur",
+  "Pilote",
+].map((key) => ({
+  key: key as RoleKey,
+  summary: "Résumé de la classe à venir…",
+  defaultStats: placeholderRoleStats(),
+}));
+
 export type AccentName = "cyan" | "magenta" | "toxic";
 
 export interface AccentPalette {

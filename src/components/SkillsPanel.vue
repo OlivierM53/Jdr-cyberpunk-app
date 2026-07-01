@@ -36,7 +36,7 @@ const skillList = computed(() => {
       <h2 class="m-0 font-display text-[13px] font-semibold tracking-[0.22em] uppercase">
         Compétences
       </h2>
-      <span class="font-mono text-[10px] tracking-[0.1em] text-dim">36 · STAT + RANG</span>
+      <span class="font-mono text-[10px] tracking-[0.1em] text-dim">{{ skillList.length }} · STAT + RANG</span>
       <div class="h-px flex-1" style="background: linear-gradient(90deg, var(--color-accent), transparent)"></div>
       <input v-model="skillQuery" placeholder="rechercher…"
         class="w-40 border border-line bg-black/40 px-2.5 py-1.5 font-mono text-xs font-medium text-txt outline-none focus:border-accent" />
