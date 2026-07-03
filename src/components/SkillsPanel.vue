@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useCharacterStore } from '@/stores/character'
-import { SKILLS, STAT_DEFS, type Stat } from '@/data/cyberpunk'
+import { DOUBLE_COST_SKILLS, SKILLS, STAT_DEFS, type Stat } from '@/data/cyberpunk'
 import InfoTooltip from '@/components/InfoTooltip.vue'
 
 const store = useCharacterStore()
@@ -23,6 +23,7 @@ const skillList = computed(() => {
     const level = store.char.skills[name] || 0
     return {
       name, statKey: st, base, level, total: base + level, description,
+      doubleCost: DOUBLE_COST_SKILLS.includes(name),
     }
   })
 })
@@ -63,6 +64,7 @@ const skillList = computed(() => {
             sk.statKey }}</span>
         <span class="flex flex-1 items-center gap-1.5 font-display text-[13px] leading-tight font-medium text-txt">
           {{ sk.name }}
+          <span v-if="sk.doubleCost" class="font-mono text-[10px] font-semibold text-accent-2" title="Coûte 2 points de compétence par rang">(x2)</span>
           <InfoTooltip :text="sk.description" />
         </span>
         <span class="font-mono text-[11px] text-dim" title="base de stat">{{ sk.base }}</span>

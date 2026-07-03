@@ -303,6 +303,13 @@ export const SKILLS = [
 
 export type SkillName = (typeof SKILLS)[number][0];
 
+// Compétences qui coûtent 2 points de compétence par rang au lieu d'1 - à compléter ici.
+export const DOUBLE_COST_SKILLS: SkillName[] = ["Tir automatique"];
+
+export function skillCost(name: SkillName): number {
+  return DOUBLE_COST_SKILLS.includes(name) ? 2 : 1;
+}
+
 export interface BgFieldDef {
   key: string;
   label: string;

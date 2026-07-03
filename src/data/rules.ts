@@ -29,7 +29,8 @@ export const RULE_TABS: RuleTab[] = [
           "CARAC + compétence + 1D10 (attaquant)",
           "contre",
           "CARAC + compétence + 1D10 (défenseur)",
-          "ou Seuil de Difficulté (SD) de la tâche",
+          "ou",
+          "Seuil de Difficulté (SD) de la tâche",
         ],
       },
       {

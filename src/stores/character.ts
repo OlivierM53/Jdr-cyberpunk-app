@@ -6,6 +6,7 @@ import {
   type RoleKey,
   ROLES,
   roleSkillDefaults,
+  skillCost,
   SKILLS,
   STAT_DEFS,
 } from "@/data/cyberpunk";
@@ -134,7 +135,7 @@ export const useCharacterStore = defineStore("character", () => {
   );
 
   const skillSum = computed(() =>
-    SKILLS.reduce((t, [name]) => t + (char.skills[name] || 0), 0)
+    SKILLS.reduce((t, [name]) => t + (char.skills[name] || 0) * skillCost(name), 0)
   );
 
   const humanityMax = computed(() => (char.stats["EMP"] || 0) * 10);

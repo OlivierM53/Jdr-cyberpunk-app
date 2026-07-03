@@ -45,7 +45,7 @@ defineProps<{ blocks: RuleBlock[]; accent: RuleAccent }>()
           v-for="(line, j) in block.lines"
           :key="j"
           class="w-fit"
-          :class="line === 'contre' ? 'my-0.5 text-center text-dim italic' : ''"
+          :class="{'my-0.5 text-dim italic': line === 'contre', 'my-0. font-bold': line === 'ou'}"
         >
           {{ line }}
         </div>
