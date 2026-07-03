@@ -36,7 +36,7 @@ function onRoleChange(e: Event) {
       <div class="h-px flex-1" style="background: linear-gradient(90deg, var(--color-accent), transparent)"></div>
     </div>
 
-    <div class="grid grid-cols-1 gap-x-4 gap-y-3.5 sm:grid-cols-2">
+    <div class="grid gap-x-4 gap-y-3.5 md:grid-cols-2">
       <label class="block">
         <span class="font-mono text-[10px] tracking-[0.16em] text-dim uppercase">Nom complet</span>
         <input
@@ -91,7 +91,7 @@ function onRoleChange(e: Event) {
         />
       </label>
 
-      <div class="col-span-2 mt-1 border-t border-line pt-3">
+      <div class="col-span-full mt-1 border-t border-line pt-3">
         <span class="font-mono text-[10px] tracking-[0.16em] text-dim uppercase">Résumé de la classe</span>
         <p class="mt-1.5 font-display text-[13px] leading-snug text-txt/80">{{ roleSummary }}</p>
       </div>

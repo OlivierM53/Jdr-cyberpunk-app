@@ -11,7 +11,7 @@ defineProps<{ text: string }>()
       i
     </span>
     <span
-      class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 -translate-x-1/2 border border-accent bg-panel p-2 text-left font-display text-xs leading-snug text-txt opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
+      class="pointer-events-none fixed top-1/2 left-1/2 z-20 w-[calc(100vw-2rem)] max-w-xs -translate-x-1/2 -translate-y-1/2 border border-accent bg-panel p-2 text-left font-display text-xs leading-snug text-txt opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100 sm:absolute sm:top-auto sm:bottom-full sm:left-1/2 sm:mb-2 sm:w-56 sm:max-w-none sm:translate-y-0"
       style="box-shadow: 0 0 12px var(--color-accent-glow)"
     >
       {{ text }}

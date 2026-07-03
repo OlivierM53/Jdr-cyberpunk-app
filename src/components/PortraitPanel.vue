@@ -82,7 +82,7 @@ function onRemove(e: Event) {
       </div>
       <button
         v-else
-        class="absolute right-2 bottom-2 cursor-pointer border border-line bg-black/65 px-2 py-1 font-mono text-[10px] text-txt opacity-0 transition-opacity group-hover:opacity-100 hover:border-accent-2 hover:text-accent-2"
+        class="absolute right-2 bottom-2 cursor-pointer border border-line bg-black/65 px-2 py-1 font-mono text-[10px] text-txt hover:border-accent-2 hover:text-accent-2"
         @click="onRemove"
       >
         Retirer
