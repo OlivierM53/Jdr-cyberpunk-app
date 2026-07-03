@@ -66,7 +66,7 @@ export const STAT_DEFS: StatDef[] = [
     key: "CHA",
     name: "Chance",
     description:
-      "Une caractéristique particulière. Voir Compter sur la Chance en page 5 pour plus de détails.",
+      "Vous obtenez autant de points de chance que cette stat. Chaque point de cahnce peut etre consommé pour avoir un bonus de 1 à un jet de compétance.",
   },
   {
     key: "MOUV",
