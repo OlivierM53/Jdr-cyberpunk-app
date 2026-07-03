@@ -8,7 +8,8 @@ const introParagraphs = computed(() => props.intro?.split('\n\n') ?? [])
 </script>
 
 <template>
-  <div v-if="introParagraphs.length" class="mb-5">
+  <div v-if="introParagraphs.length" class="relative mb-5 border border-line bg-panel p-6">
+    <div :class="accent === 'accent2' ? 'edge-accent-2' : 'edge-accent'"></div>
     <p
       v-for="(para, i) in introParagraphs"
       :key="i"

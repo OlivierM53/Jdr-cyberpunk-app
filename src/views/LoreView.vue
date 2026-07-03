@@ -16,7 +16,7 @@ const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value)
     <button
       v-for="tab in LORE_TABS"
       :key="tab.id"
-      class="cursor-pointer border px-3 py-1.5 font-display text-[10px] font-semibold tracking-[0.16em] uppercase sm:px-4 sm:py-2 sm:text-[11px]"
+      class="cursor-pointer border px-3 py-1.5 font-display text-[10px] font-semibold tracking-[0.16em] uppercase sm:px-4 sm:py-2 sm:text-[11px] bg-panel"
       :class="
         activeId === tab.id
           ? tab.accent === 'accent2'
