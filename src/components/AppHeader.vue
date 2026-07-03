@@ -60,6 +60,15 @@ const BG_MODE_LABELS: Record<string, string> = {
       >
         Lore
       </RouterLink>
+      <RouterLink
+        to="/regles"
+        class="cursor-pointer border-l border-line px-4 py-2 font-display text-[11px] font-semibold tracking-[0.16em] uppercase"
+        :class="
+          route.path === '/regles' ? 'bg-accent-soft text-accent' : 'text-dim hover:text-accent'
+        "
+      >
+        Règles
+      </RouterLink>
     </div>
 
     <div class="flex-1"></div>

@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'lore',
       component: () => import('@/views/LoreView.vue'),
     },
+    {
+      path: '/regles',
+      name: 'regles',
+      component: () => import('@/views/RulesView.vue'),
+    },
   ],
 })
 
