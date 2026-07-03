@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { RuleAccent, RuleBlock } from '@/data/rules'
 import LoreDefinitionList from '@/components/LoreDefinitionList.vue'
+import RuleItemCard from '@/components/RuleItemCard.vue'
 
 defineProps<{ blocks: RuleBlock[]; accent: RuleAccent }>()
 </script>
@@ -78,6 +79,16 @@ defineProps<{ blocks: RuleBlock[]; accent: RuleAccent }>()
           </tbody>
         </table>
       </div>
+
+      <div v-else-if="block.kind === 'items'" class="mb-4 grid grid-cols-1 gap-4.5 sm:grid-cols-2">
+        <RuleItemCard v-for="(item, ii) in block.items" :key="ii" :item="item" :accent="accent" />
+      </div>
+
+      <div
+        v-else-if="block.kind === 'divider'"
+        class="my-6 h-px"
+        style="background: linear-gradient(90deg, transparent, var(--color-line) 15%, var(--color-line) 85%, transparent)"
+      ></div>
     </template>
   </div>
 </template>

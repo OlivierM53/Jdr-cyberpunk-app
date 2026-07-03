@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { RULE_TABS } from '@/data/rules'
+import { useTabQuery } from '@/composables/useTabQuery'
 import RuleBlocks from '@/components/RuleBlocks.vue'
 
-const activeId = ref(RULE_TABS[0]!.id)
+const { activeId, selectTab } = useTabQuery(RULE_TABS)
 const active = computed(() => RULE_TABS.find((tab) => tab.id === activeId.value) ?? RULE_TABS[0]!)
 </script>
 
@@ -20,7 +21,7 @@ const active = computed(() => RULE_TABS.find((tab) => tab.id === activeId.value)
             : 'border-accent bg-accent-soft text-accent'
           : 'border-line text-dim hover:text-accent'
       "
-      @click="activeId = tab.id"
+      @click="selectTab(tab.id)"
     >
       {{ tab.label }}
     </button>

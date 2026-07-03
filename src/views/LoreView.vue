@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { LORE_TABS } from '@/data/lore'
 import { assetUrl } from '@/utils/asset'
+import { useTabQuery } from '@/composables/useTabQuery'
 import LoreCardGrid from '@/components/LoreCardGrid.vue'
 import LoreSectionList from '@/components/LoreSectionList.vue'
 import LoreDefinitionList from '@/components/LoreDefinitionList.vue'
 import LoreTimeline from '@/components/LoreTimeline.vue'
 
-const activeId = ref(LORE_TABS[0]!.id)
+const { activeId, selectTab } = useTabQuery(LORE_TABS)
 const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value) ?? LORE_TABS[0]!)
 </script>
 
@@ -24,7 +25,7 @@ const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value)
             : 'border-accent bg-accent-soft text-accent'
           : 'border-line text-dim hover:text-accent'
       "
-      @click="activeId = tab.id"
+      @click="selectTab(tab.id)"
     >
       {{ tab.label }}
     </button>

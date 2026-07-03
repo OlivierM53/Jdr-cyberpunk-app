@@ -2,13 +2,41 @@
 
 export type RuleAccent = "accent" | "accent2";
 
+export interface RuleItemNote {
+  // Terme en gras (ex. "Excellente qualité") — si absent, la note est un simple paragraphe.
+  term?: string;
+  description: string;
+}
+
+export interface RuleItemStat {
+  label: string;
+  value: string;
+}
+
+export interface RuleItem {
+  name: string;
+  // Sous-titre (type d'arme, ex. "Fusil à pompe") — absent pour le cyberware.
+  subtitle?: string;
+  price?: string;
+  // Ligne de stats compactes (DÉG, Att, Chargeur, Main, Diss) — uniquement pour les armes.
+  stats?: RuleItemStat[];
+  // Table de portée (SD par tranche de distance) — uniquement pour les armes à feu.
+  rangeTable?: { headers: string[]; row: string[] };
+  // Coût en Humanité (ex. "1d6", "2d6") — uniquement pour le cyberware.
+  humanityCost?: string;
+  notes?: RuleItemNote[];
+}
+
 export type RuleBlock =
   | { kind: "heading"; text: string }
   | { kind: "paragraph"; text: string }
   | { kind: "formula"; lines: string[] }
   | { kind: "list"; items: string[] }
   | { kind: "definitions"; entries: { term: string; description: string }[] }
-  | { kind: "table"; headers: string[]; rows: string[][] };
+  | { kind: "table"; headers: string[]; rows: string[][] }
+  | { kind: "items"; items: RuleItem[] }
+  // Séparateur visuel entre deux groupes de blocs au sein d'un même onglet.
+  | { kind: "divider" };
 
 export interface RuleTab {
   id: string;
@@ -16,6 +44,24 @@ export interface RuleTab {
   accent: RuleAccent;
   blocks: RuleBlock[];
 }
+
+const RANGE_HEADERS = [
+  "0-6",
+  "7-12",
+  "13-25",
+  "25-50",
+  "51-100",
+  "101-200",
+  "201-400",
+  "401-800",
+];
+
+// Tables de portée standard par catégorie d'arme (SD par tranche de distance en mètres).
+const RANGE_SNIPER = ["30", "25", "25", "20", "15", "16", "17", "20"];
+const RANGE_SHOTGUN = ["13", "15", "20", "25", "30", "35", "-", "-"];
+const RANGE_HEAVY_PISTOL = ["13", "15", "20", "25", "30", "30", "-", "-"];
+const RANGE_SMG = ["15", "13", "15", "20", "25", "25", "30", "-"];
+const RANGE_RIFLE = ["17", "16", "15", "13", "15", "20", "25", "30"];
 
 export const RULE_TABS: RuleTab[] = [
   {
@@ -159,6 +205,36 @@ export const RULE_TABS: RuleTab[] = [
         kind: "formula",
         lines: ["DEX + compétence Esquive + 1D10 (défenseur)"],
       },
+      { kind: "heading", text: "Attaque cinétique" },
+      {
+        kind: "paragraph",
+        text:
+          "Les points de dégâts des blessures critiques infligés par les armes cinétiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+      },
+      { kind: "heading", text: "Attaque Technique" },
+      {
+        kind: "paragraph",
+        text:
+          "Les armes techniques nécéssite d'être chargé avant de tirer. L'utilisateur doit utiliser son action ou son action de mouvement pour charger l'arme jusqu'au prochain tour. Un tir d'arme technique ignore la moitié de l'armure de la cible et passe au travers des couverts.",
+      },
+      { kind: "heading", text: "Attaque intéligentes" },
+      {
+        kind: "paragraph",
+        text:
+          "+ 1 au jet d'attaque. Peut recevoir des munitons intéligentes améliorées.",
+      },
+      { kind: "heading", text: "Munitons intéligentes améliorées" },
+      {
+        kind: "paragraph",
+        text:
+          "Quand une arme intéligente est équipée de munitons intéligentes améliorées, l'utilisateur ignore les pénalitées causées par l'obscurité, la fumé, le brouillard et tou ce qui brouille le champs de vision.",
+      },
+      {
+        kind: "paragraph",
+        text:
+          "Si l'utilsateur d'une arme intéligente est équipée de munitons intéligentes améliorées rate un jet d'attaque de 5 ou moins, il peut imméditement réessayer de toucher la cible. Pour sa 2ème tentative, il fait un jt de 14 + 1d10 contre le SD d'origine. Les bonus ne s'appliquent pas mais les malus s'appliquent lors de ce jet.",
+      },
+      { kind: "divider" },
       { kind: "heading", text: "Attaque de mêlée" },
       {
         kind: "formula",
@@ -387,6 +463,497 @@ export const RULE_TABS: RuleTab[] = [
             "Assistance médicale SD 15",
             "Assistance médicale ou Chirurgie SD 15",
           ],
+        ],
+      },
+    ],
+  },
+  {
+    id: "armurerie",
+    label: "Armurerie",
+    accent: "accent",
+    blocks: [
+      { kind: "heading", text: "Armes" },
+      {
+        kind: "items",
+        items: [
+          {
+            name: "Tsunami Arms Nekomata",
+            subtitle: "Fusil de précision",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SNIPER },
+            stats: [
+              { label: "DÉG", value: "5d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "4 (fusil)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme technique",
+                description:
+                  "Équipée d'un viseur pour distinguer le contour des cibles à travers un couvert mince et épais. En sacrifiant son action de mouvement, l'utilisateur peut charger l'arme pendant 60 secondes (20 rounds) ou jusqu'à ce qu'il ait tiré.",
+              },
+              {
+                term: "Tir chargé",
+                description:
+                  "Quand l'arme est chargée, la prochaine attaque a 1 Att/round, peut tirer à travers un couvert mince ou épais, et ignore la moitié du PA de la cible (arrondi au supérieur).",
+              },
+            ],
+          },
+          {
+            name: "Fusil à pompe Rostović DB-2 Satara",
+            subtitle: "Fusil à pompe",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SHOTGUN },
+            stats: [
+              { label: "DÉG", value: "5d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "2 (slugs)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme technique",
+                description:
+                  "Équipée d'un viseur pour distinguer le contour des cibles à travers un couvert mince et épais. En sacrifiant son action de mouvement, l'utilisateur peut charger l'arme pendant 60 secondes (20 rounds) ou jusqu'à ce qu'il ait tiré.",
+              },
+              {
+                term: "Tir chargé",
+                description:
+                  "Quand l'arme est chargée, la prochaine attaque a 1 Att/round, peut tirer à travers un couvert mince, et ignore la moitié du PA de la cible (arrondi au supérieur).",
+              },
+              {
+                term: "Chevrotine",
+                description:
+                  "Compétence Armes d'épaule. Inflige SD 13 contre 5d6 points de dégâts à toutes les cibles situées à 6 m (3 cases) devant le tireur.",
+              },
+            ],
+          },
+          {
+            name: "Techtronika RT-46 Burya",
+            subtitle: "Pistolet très lourd",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_HEAVY_PISTOL },
+            stats: [
+              { label: "DÉG", value: "4d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "4 (pistolet TL)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme technique",
+                description:
+                  "Équipée d'un viseur pour distinguer le contour des cibles à travers un couvert mince et épais. En sacrifiant son action de mouvement, l'utilisateur peut charger l'arme pendant 60 secondes (20 rounds) ou jusqu'à ce qu'il ait tiré.",
+              },
+              {
+                term: "Tir chargé",
+                description:
+                  "Quand l'arme est chargée, la prochaine attaque a 1 Att/round, peut tirer à travers un couvert mince, et ignore la moitié du PA de la cible (arrondi au supérieur).",
+              },
+              {
+                description:
+                  "Un utilisateur qui n'a pas de maillage musculosquelettique subit la blessure critique \"Bras Cassé\" lorsqu'il tire avec cette arme.",
+              },
+            ],
+          },
+          {
+            name: "Techtronika SPT32 Grad",
+            subtitle: "Fusil de précision",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SNIPER },
+            stats: [
+              { label: "DÉG", value: "5d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "4 (fusil)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+              {
+                description:
+                  "Il faut actionner le verrou avant de faire feu à chaque fois, avant de pouvoir tirer à nouveau. (-3 MOUV pendant le tour ou action pour actionner le verrou)",
+              },
+            ],
+          },
+          {
+            name: "Militech Crusher",
+            subtitle: "Pistolet très lourd",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_HEAVY_PISTOL },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "12 (chevrotine)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+              { description: "Peut recevoir uniquement des chevrotines." },
+              {
+                term: "Chevrotine",
+                description:
+                  "Inflige 3d6 points de dégâts contre SD 13 à toutes les cibles situées à 6 m (3 cases) devant le tireur.",
+              },
+            ],
+          },
+          {
+            name: "Militech M-10AF Lexington",
+            subtitle: "Pistolet lourd",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_HEAVY_PISTOL },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "2" },
+              { label: "Chargeur", value: "21 (pistolet L)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Oui" },
+            ],
+            notes: [
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+            ],
+          },
+          {
+            name: "Militech M-76e Omaha",
+            subtitle: "Pistolet lourd",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_HEAVY_PISTOL },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "2" },
+              { label: "Chargeur", value: "9 (pistolet L)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme technique",
+                description:
+                  "Équipée d'un viseur pour distinguer le contour des cibles à travers un couvert mince. En sacrifiant son action de mouvement, l'utilisateur peut charger l'arme jusqu'à la fin du tour où elle est tirée.",
+              },
+              {
+                term: "Tir chargé",
+                description:
+                  "Quand elle est chargée, elle a 2 Att/round et tire 3 munitions au lieu de 1 par jet d'attaque. Si elle continet moins de 3 munitions, le tir vide le cahrgeur. L'arme peut tirer à travers un couvert mince et ignore la moitié du PA de la cible (arrondi au supérieur).",
+              },
+            ],
+          },
+          {
+            name: "Budget Arms Carnage",
+            subtitle: "Fusil à pompe",
+            price: "Très courant",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SHOTGUN },
+            stats: [
+              { label: "DÉG", value: "5d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "5 (chevrotine)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Mauvaise qualité",
+                description:
+                  "S'enraye sur une jet de 1. Le tir part mais le tireur doit faire une action pour désenrayer l'arme.",
+              },
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+              {
+                term: "Chevrotine",
+                description:
+                  "Inflige 5d6 points de dégâts contre SD 13 à toutes les cibles situées à 6 m (3 cases) devant le tireur. Un utilisateur qui n'a pas 10 ou plus en COR subit la blessure critique Muscle déchiré lorsqu'il tire avec cette arme.",
+              },
+            ],
+          },
+          {
+            name: "Constitutional Arms Unity",
+            subtitle: "Pistolet lourd",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_HEAVY_PISTOL },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "2" },
+              { label: "Chargeur", value: "12 (pistolet L)" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Oui" },
+            ],
+            notes: [
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+              {
+                term: "Viser",
+                description:
+                  "Compétence Pistolet. Inflige 4d6 points de dégâts mais 1 Atk/round.",
+              },
+            ],
+          },
+          {
+            name: "Kang Tao L-69 Zhuo",
+            subtitle: "Fusil à pompe",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SMG },
+            stats: [
+              { label: "DÉG", value: "4d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "32 (chevrotine)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme intelligente",
+                description:
+                  "+1 au jet d'attaque. Peut uniquement recevoir des munitions intelligentes améliorées.",
+              },
+              {
+                term: "Chevrotine",
+                description:
+                  "Compétence Armes d'épaule. Inflige 4d6 points de dégâts contre SD 13 à toutes les cibles situées à 6 m (3 cases) devant le tireur. Consomme 8 chevrotines par jet d'attaque. Ne tire pas si l'arme contient moins de 8 chevrotines.",
+              },
+            ],
+          },
+          {
+            name: "Arasaka HJKE-11 Yukimura",
+            subtitle: "PM",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SMG },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "24 (Pistolet M)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                description:
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+              },
+              {
+                term: "Arme intelligente",
+                description:
+                  "+1 au jet d'attaque. Peut recevoir des munitions intelligentes améliorées.",
+              },
+              {
+                term: "Tir automatique",
+                description:
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x3) pour calculer les dégâts. 10 munitions par jet d'attaque",
+              },
+            ],
+          },
+          {
+            name: "Arasaka HJSH-18 Masamune",
+            subtitle: "Fusil d'assaut",
+            price: "Onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_RIFLE },
+            stats: [
+              { label: "DÉG", value: "5d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "24 (Fusil)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                description:
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+              },
+              {
+                term: "Arme cinétique",
+                description:
+                  "Les points de dégâts des blessures critiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
+              },
+              {
+                term: "Tir automatique",
+                description:
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
+              },
+            ],
+          },
+          {
+            name: "Arasaka TKI-20 Shingen",
+            subtitle: "PM lourd",
+            price: "Très onéreux",
+            rangeTable: { headers: RANGE_HEADERS, row: RANGE_SMG },
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "1" },
+              { label: "Chargeur", value: "30 (pistolet L)" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                description:
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+              },
+              {
+                term: "Arme intelligente",
+                description:
+                  "+1 au jet d'attaque. Peut recevoir des munitions intelligentes améliorées.",
+              },
+              {
+                term: "Tir automatique",
+                description:
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
+              },
+            ],
+          },
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Cyberware" },
+      {
+        kind: "items",
+        items: [
+          {
+            name: "Bras de gorille",
+            price: "Très onéreux",
+            humanityCost: "4d6",
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att/round", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              { description: "Nécessite un cyberbras." },
+              { description: "Prend 2 emplacements de cyberbars" },
+              {
+                term: "Arme de mêlée",
+                description:
+                  "Compétence Arme de mêlée. Le poing d'un bras de gorille est considéré comme une arme de mêlée.",
+              },
+              {
+                description:
+                  "L'utilisateur peut manier les armes à deux mains à une seule main. Les règles d'Att/round s'appliquent normalement.",
+              },
+              {
+                description:
+                  "Si l'utilisateur en installe sur 2 cyberbras, il peut faire des jets pour déplacer des objets, enfoncer des portes, faires les actions étrangler et lancer comme s'il avait COR 11",
+              },
+            ],
+          },
+          {
+            name: "Lames Mantis",
+            price: "Onéreux",
+            humanityCost: "4d6",
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att/round", value: "2" },
+              { label: "Diss", value: "Oui" },
+            ],
+            notes: [
+              { description: "Nécessite un cyberbras." },
+              {
+                description: "Prend 2 emplacements de cyberbars",
+              },
+              {
+                term: "Arme de mêlée",
+                description: "Compétence Arme de mêlée.",
+              },
+              {
+                description:
+                  "Quand une Lame Mantis est déployée, l'utilisateur ne peut rien tenir dans la main du bras concerné.",
+              },
+              {
+                description:
+                  "Quand deux Lames Mantis installées sur deux cyberbras différents sont déployées, l'utilisateur ne subit pas les pénalités de mouvement quand il escalade.",
+              },
+            ],
+          },
+          {
+            name: "Monocâble",
+            price: "Très onéreux",
+            humanityCost: "2d6",
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att/round", value: "2" },
+              { label: "Diss", value: "Oui" },
+            ],
+            notes: [
+              { description: "Nécessite un cyberbras." },
+              {
+                term: "Arme de mêlée",
+                description:
+                  "Compétence Arme de mêlée. L'utilisateur peut faire des jets d'attaque contre une cible située à 6 m (3 cases) ou moins.",
+              },
+              {
+                description:
+                  "Chaque fois qu'un monocâble inflige une blessure critique, l'attaquant fait deux jets sur le tableau des blessures critiques et choisit le résultat qui affligera sa victime.",
+              },
+            ],
+          },
+          {
+            name: "Auto-GLACE",
+            price: "Onéreux",
+            humanityCost: "1d6",
+            notes: [
+              { description: "Vous pouvez en installer jusqu'à 3." },
+              {
+                description:
+                  "Pour chaque auto-GLACE installée, le neurotport de l'utilisateur reçoit une barrière qui constitue une ligne de défense supplémentaire. Un Netrunner qui tente de pirater le neuroport de l'utilisateur doit dépenser une action irtuelle pour percer chaque barrière installée.",
+              },
+              {
+                term: "SD selon le nombre installé",
+                description:
+                  "1 auto-GLACE : SD 6 • 2 auto-GLACE : SD 8 • 3 auto-GLACE : SD 10",
+              },
+            ],
+          },
+          {
+            name: "Implant Berserk",
+            price: "Très onéreux",
+            humanityCost: "2d6",
+            notes: [
+              { description: "S'active avec une action." },
+              {
+                description:
+                  "Quand l'implant Berserk est activé, l'utilisateur ignore les effets des états blessure grave et blessure mortelle pendant 60 secondes (20 rounds), à une exception près : un personnage mortellement blessé doit toujours faire ses jets de sauvegarde contre la mort. Une fois sa période d'activation expirée, l'implant ne peut plus être activé pendant 1 heure.",
+              },
+            ],
+          },
+          {
+            name: "Cyberbras",
+            price: "Onéreux",
+            notes: [
+              {
+                description:
+                  "Un bras cybernétique qui remplace votre bras de chair.",
+              },
+              {
+                description:
+                  "Comprend 4 emplacements pour extension de cyberbras ou de cybermembre, comme des bras de gorille ou des lames Mantis.",
+              },
+              {
+                description:
+                  "Si vous avez 4 ou moins en COR, vous infligez 2d6 de dégâts lorsque que faites des jets de bagarre.",
+              },
+              { description: "Vous pouvez endommager des couverts en acier." },
+            ],
+          },
         ],
       },
     ],
