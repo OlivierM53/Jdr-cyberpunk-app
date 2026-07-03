@@ -36,7 +36,7 @@ function onRoleChange(e: Event) {
       <div class="h-px flex-1" style="background: linear-gradient(90deg, var(--color-accent), transparent)"></div>
     </div>
 
-    <div class="grid grid-cols-2 gap-x-4 gap-y-3.5">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-3.5 sm:grid-cols-2">
       <label class="block">
         <span class="font-mono text-[10px] tracking-[0.16em] text-dim uppercase">Nom complet</span>
         <input

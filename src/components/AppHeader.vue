@@ -11,7 +11,7 @@ const accentList = Object.keys(ACCENTS) as AccentName[]
 
 <template>
   <div
-    class="mb-[22px] flex flex-wrap items-center gap-[18px] border-b border-line pb-4"
+    class="mb-[22px] flex flex-wrap items-center gap-3 border-b border-line pb-4 sm:gap-4.5"
   >
     <div class="flex items-center gap-3">
       <div
@@ -63,7 +63,7 @@ const accentList = Object.keys(ACCENTS) as AccentName[]
         class="animate-blink h-2 w-2 rounded-full bg-[#46e08a]"
         style="box-shadow: 0 0 8px #46e08a"
       ></span>
-      <span class="font-mono text-[10px] tracking-[0.2em] text-dim">SYNCHRONISÉ</span>
+      <span class="hidden font-mono text-[10px] tracking-[0.2em] text-dim sm:inline">SYNCHRONISÉ</span>
     </div>
 
     <button

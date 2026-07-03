@@ -19,7 +19,7 @@ const store = useCharacterStore()
       ></div>
     </div>
 
-    <div class="grid grid-cols-3 gap-x-4 gap-y-3.5">
+    <div class="grid grid-cols-1 gap-x-4 gap-y-3.5 sm:grid-cols-2 lg:grid-cols-3">
       <label v-for="bf in BG_FIELDS" :key="bf.key" class="flex flex-col">
         <span class="mb-1.5 font-mono text-[10px] tracking-[0.14em] text-dim uppercase">{{
           bf.label

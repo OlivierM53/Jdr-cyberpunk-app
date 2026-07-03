@@ -16,7 +16,7 @@ const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value)
     <button
       v-for="tab in LORE_TABS"
       :key="tab.id"
-      class="cursor-pointer border px-4 py-2 font-display text-[11px] font-semibold tracking-[0.16em] uppercase"
+      class="cursor-pointer border px-3 py-1.5 font-display text-[10px] font-semibold tracking-[0.16em] uppercase sm:px-4 sm:py-2 sm:text-[11px]"
       :class="
         activeId === tab.id
           ? tab.accent === 'accent2'
@@ -54,11 +54,11 @@ const active = computed(() => LORE_TABS.find((tab) => tab.id === activeId.value)
       >
         La ville
       </h3>
-      <div class="flex gap-10">
+      <div class="flex flex-col gap-6 sm:flex-row sm:gap-10">
         <img
         :src="assetUrl('night-city.webp')"
         alt="Night City"
-        class="mb-5 w-1/2 border border-line object-cover"
+        class="mb-5 w-full border border-line object-cover sm:w-1/2"
         />
         <LoreDefinitionList title="Districts" :entries="active.content.districts" :accent="active.accent" />
       </div>

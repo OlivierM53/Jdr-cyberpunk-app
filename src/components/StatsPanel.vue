@@ -22,7 +22,7 @@ const store = useCharacterStore()
       <span class="font-mono text-[15px] font-bold text-accent">{{ store.statSum }}</span>
     </div>
 
-    <div class="grid grid-cols-5 gap-3">
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       <div
         v-for="d in STAT_DEFS"
         :key="d.key"

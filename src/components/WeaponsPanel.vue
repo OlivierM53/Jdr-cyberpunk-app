@@ -19,7 +19,7 @@ const store = useCharacterStore()
     </div>
 
     <div
-      class="grid grid-cols-[1fr_108px_108px_34px] gap-2.5 px-0.5 pb-[7px] font-mono text-[9px] tracking-[0.14em] text-dim uppercase"
+      class="grid grid-cols-[1fr_64px_64px_34px] sm:grid-cols-[1fr_108px_108px_34px] gap-2.5 px-0.5 pb-[7px] font-mono text-[9px] tracking-[0.14em] text-dim uppercase"
     >
       <span>Arme</span><span class="text-center">Dégâts</span
       ><span class="text-center">Atq / tour</span><span></span>
@@ -29,12 +29,12 @@ const store = useCharacterStore()
       <div
         v-for="wp in store.char.weapons"
         :key="wp.id"
-        class="grid grid-cols-[1fr_108px_108px_34px] items-center gap-2.5"
+        class="grid grid-cols-[1fr_64px_64px_34px] sm:grid-cols-[1fr_108px_108px_34px] items-center gap-2.5"
       >
         <input
           :value="wp.name"
           placeholder="Désignation de l'arme…"
-          class="border border-line bg-black/30 px-[11px] py-2 font-display text-sm font-medium text-txt outline-none focus:border-accent"
+          class="min-w-0 border border-line bg-black/30 px-[11px] py-2 font-display text-sm font-medium text-txt outline-none focus:border-accent"
           @change="store.updateWeapon(wp.id, { name: ($event.target as HTMLInputElement).value })"
         />
         <input

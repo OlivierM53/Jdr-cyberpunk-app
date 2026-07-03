@@ -133,6 +133,10 @@ export const useCharacterStore = defineStore("character", () => {
     STAT_DEFS.reduce((t, d) => t + (char.stats[d.key] || 0), 0)
   );
 
+  const skillSum = computed(() =>
+    SKILLS.reduce((t, [name]) => t + (char.skills[name] || 0), 0)
+  );
+
   const humanityMax = computed(() => (char.stats["EMP"] || 0) * 10);
   const humanityNow = computed(() =>
     Math.max(0, Math.min(humanityMax.value, char.humanity || 0))
@@ -285,6 +289,7 @@ export const useCharacterStore = defineStore("character", () => {
     hpMax,
     hpPct,
     statSum,
+    skillSum,
     humanityMax,
     humanityNow,
     humanityPct,

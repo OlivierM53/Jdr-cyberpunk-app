@@ -87,7 +87,7 @@ async function onImportChange(e: Event) {
     </button>
   </div>
 
-  <div class="mb-4.5 grid grid-cols-[248px_1fr_312px] gap-4.5">
+  <div class="mb-4.5 grid grid-cols-1 gap-4.5 lg:grid-cols-[248px_1fr_312px]">
     <PortraitPanel />
     <IdentityPanel />
     <VitalsPanel />
@@ -97,7 +97,7 @@ async function onImportChange(e: Event) {
   <SkillsPanel />
   <WeaponsPanel />
 
-  <div class="mb-4.5 grid grid-cols-2 gap-4.5">
+  <div class="mb-4.5 grid grid-cols-1 gap-4.5 sm:grid-cols-2">
     <CyberwarePanel />
     <EquipmentPanel />
   </div>

@@ -15,7 +15,7 @@ onMounted(() => store.applyAccent(store.accent))
   <HackBackground />
   <IntroOverlay />
 
-  <div class="relative z-1 mx-auto max-w-335 px-6 pt-5.5 pb-20">
+  <div class="relative z-1 mx-auto max-w-335 px-4 pt-5.5 pb-20 sm:px-6">
     <AppHeader />
 
     <RouterView />

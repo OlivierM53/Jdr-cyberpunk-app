@@ -18,7 +18,7 @@ const introParagraphs = computed(() => props.intro?.split('\n\n') ?? [])
     </p>
   </div>
 
-  <div class="grid grid-cols-2 gap-4.5">
+  <div class="grid grid-cols-1 gap-4.5 sm:grid-cols-2">
     <LoreEntryCard v-for="card in cards" :key="card.name" :card="card" :accent="accent" />
   </div>
 </template>

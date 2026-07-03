@@ -6,11 +6,11 @@ defineProps<{ card: LoreCard; accent: LoreAccent }>()
 </script>
 
 <template>
-  <div class="relative border border-line bg-panel p-5 flex items-center">
+  <div class="relative flex flex-col border border-line bg-panel p-5 sm:flex-row sm:items-center">
     <div :class="accent === 'accent2' ? 'edge-accent-2' : 'edge-accent'"></div>
     <img v-if="card.logo" :src="assetUrl(card.logo)" :alt="card.name"
-      class="w-30 h-30 flex-none border border-line object-cover" />
-    <div class="flex flex-col pl-4">
+      class="mx-auto h-30 w-30 flex-none border border-line object-cover sm:mx-0" />
+    <div class="flex flex-col pt-3 sm:pl-4 sm:pt-0">
       <div class="mb-2 flex items-start justify-between gap-3">
         <div class="flex items-center gap-3">
           <h3 class="font-display text-lg font-bold text-txt uppercase tracking-[0.04em]">
