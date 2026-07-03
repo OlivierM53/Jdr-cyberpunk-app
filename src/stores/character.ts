@@ -106,7 +106,7 @@ function loadCharacter(): Character {
 export const useCharacterStore = defineStore("character", () => {
   const char = reactive<Character>(loadCharacter());
   const accent = ref<AccentName>("cyan");
-  const bgMode = ref<"rain" | "grid">("rain");
+  const bgMode = ref<"rain" | "grid" | "solid">("rain");
   let nextId = 100;
 
   watch(
@@ -260,8 +260,10 @@ export const useCharacterStore = defineStore("character", () => {
     root.setProperty("--color-accent-glow", p.glow);
   }
 
+  const BG_MODES = ["rain", "grid", "solid"] as const;
   function toggleBgMode() {
-    bgMode.value = bgMode.value === "rain" ? "grid" : "rain";
+    const next = BG_MODES[(BG_MODES.indexOf(bgMode.value) + 1) % BG_MODES.length];
+    bgMode.value = next ?? "rain";
   }
 
   function reset() {

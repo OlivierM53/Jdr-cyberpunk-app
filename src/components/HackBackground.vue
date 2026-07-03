@@ -277,8 +277,16 @@ function drawGrid() {
   ctx.shadowBlur = 0
 }
 
+function drawSolid() {
+  const cv = canvas.value
+  if (!cv || !ctx) return
+  ctx.fillStyle = '#06080c'
+  ctx.fillRect(0, 0, cv.width, cv.height)
+}
+
 function loop() {
   if (store.bgMode === 'grid') drawGrid()
+  else if (store.bgMode === 'solid') drawSolid()
   else drawRain()
   raf = requestAnimationFrame(loop)
 }

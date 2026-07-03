@@ -7,6 +7,12 @@ const store = useCharacterStore()
 const route = useRoute()
 
 const accentList = Object.keys(ACCENTS) as AccentName[]
+
+const BG_MODE_LABELS: Record<string, string> = {
+  rain: '≋ PLUIE',
+  grid: '⬡ RÉSEAU',
+  solid: '■ SOMBRE',
+}
 </script>
 
 <template>
@@ -67,11 +73,11 @@ const accentList = Object.keys(ACCENTS) as AccentName[]
     </div>
 
     <button
-      title="Changer l'animation de fond"
+      title="Changer le fond"
       class="min-w-[104px] cursor-pointer border border-line bg-transparent px-3 py-2 text-center font-mono text-[11px] font-semibold tracking-[0.12em] text-dim hover:border-accent hover:text-accent"
       @click="store.toggleBgMode()"
     >
-      {{ store.bgMode === 'rain' ? '≋ PLUIE' : '⬡ RÉSEAU' }}
+      {{ BG_MODE_LABELS[store.bgMode] }}
     </button>
 
     <div class="flex border border-line">
