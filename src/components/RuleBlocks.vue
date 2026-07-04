@@ -41,7 +41,7 @@ defineProps<{ blocks: RuleBlock[]; accent: RuleAccent }>()
         :accent="accent"
       />
 
-      <div v-else-if="block.kind === 'formula'" class="mb-4 border border-line bg-black/30 p-3 font-mono text-[13px] leading-relaxed text-txt flex flex-col items-center">
+      <div v-else-if="block.kind === 'formula'" class="mb-4 border border-line bg-inset/30 p-3 font-mono text-[13px] leading-relaxed text-txt flex flex-col items-center">
         <div
           v-for="(line, j) in block.lines"
           :key="j"
@@ -55,7 +55,7 @@ defineProps<{ blocks: RuleBlock[]; accent: RuleAccent }>()
       <div v-else-if="block.kind === 'table'" class="mb-4 overflow-x-auto border border-line">
         <table class="w-full min-w-[420px] border-collapse font-mono text-[13px]">
           <thead>
-            <tr class="border-b border-line bg-black/40">
+            <tr class="border-b border-line bg-inset/40">
               <th
                 v-for="(h, hi) in block.headers"
                 :key="hi"

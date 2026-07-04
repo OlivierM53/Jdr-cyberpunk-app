@@ -683,3 +683,26 @@ export const ACCENTS: Record<AccentName, AccentPalette> = {
     glow: "rgba(198,255,61,.45)",
   },
 };
+
+// Variantes des accents pour le mode clair : teintes plus foncées/saturées,
+// les néons d'origine étant pensés pour un fond noir et peu lisibles sur blanc.
+export const ACCENTS_LIGHT: Record<AccentName, AccentPalette> = {
+  cyan: {
+    a: "#0592b0",
+    b: "#c81760",
+    soft: "rgba(5,146,176,.10)",
+    glow: "rgba(5,146,176,.35)",
+  },
+  magenta: {
+    a: "#c81760",
+    b: "#0592b0",
+    soft: "rgba(200,23,96,.10)",
+    glow: "rgba(200,23,96,.35)",
+  },
+  toxic: {
+    a: "#5c8a00",
+    b: "#c81760",
+    soft: "rgba(92,138,0,.10)",
+    glow: "rgba(92,138,0,.35)",
+  },
+};

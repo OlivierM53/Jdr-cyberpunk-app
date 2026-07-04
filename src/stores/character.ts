@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import {
   type AccentName,
   ACCENTS,
+  ACCENTS_LIGHT,
   type RoleKey,
   ROLES,
   roleSkillDefaults,
@@ -12,6 +13,9 @@ import {
 } from "@/data/cyberpunk";
 
 const STORAGE_KEY = "cyber-chargen-v1";
+const THEME_KEY = "cyber-chargen-theme";
+
+export type Theme = "dark" | "light";
 
 export interface Weapon {
   id: number;
@@ -69,25 +73,13 @@ function defaultCharacter(): Character {
     stats,
     skills,
     hp: 35,
-    armorHead: 11,
-    armorBody: 11,
+    armorHead: 7,
+    armorBody: 7,
     humanity: 40,
     eddies: 500,
-    weapons: [
-      { id: 1, name: "Pistolet lourd", dmg: "2d6", atk: 2 },
-      { id: 2, name: "Fusil d’assaut", dmg: "5d6", atk: 1 },
-      { id: 3, name: "Katana monomoléculaire", dmg: "3d6", atk: 2 },
-    ],
-    cyberware: [
-      { id: 1, name: "Interface neuronale", cost: 2 },
-      { id: 2, name: "Optiques augmentées", cost: 3 },
-      { id: 3, name: "Lames rétractables", cost: 5 },
-    ],
-    equipment: [
-      { id: 1, type: "Armure", name: "Veste blindée", qty: 1 },
-      { id: 2, type: "Conso", name: "Stim de soin", qty: 3 },
-      { id: 3, type: "Outil", name: "Cyberdeck", qty: 1 },
-    ],
+    weapons: [],
+    cyberware: [],
+    equipment: [],
     bg: {},
     portrait: null,
   };
@@ -108,6 +100,9 @@ export const useCharacterStore = defineStore("character", () => {
   const char = reactive<Character>(loadCharacter());
   const accent = ref<AccentName>("cyan");
   const bgMode = ref<"rain" | "grid" | "solid">("rain");
+  const theme = ref<Theme>(
+    (localStorage.getItem(THEME_KEY) as Theme) || "dark",
+  );
   let nextId = 100;
 
   watch(
@@ -135,7 +130,10 @@ export const useCharacterStore = defineStore("character", () => {
   );
 
   const skillSum = computed(() =>
-    SKILLS.reduce((t, [name]) => t + (char.skills[name] || 0) * skillCost(name), 0)
+    SKILLS.reduce(
+      (t, [name]) => t + (char.skills[name] || 0) * skillCost(name),
+      0,
+    )
   );
 
   const humanityMax = computed(() => (char.stats["EMP"] || 0) * 10);
@@ -253,7 +251,8 @@ export const useCharacterStore = defineStore("character", () => {
     applyAccent(name);
   }
   function applyAccent(name: AccentName) {
-    const p = ACCENTS[name] || ACCENTS.cyan;
+    const palette = theme.value === "light" ? ACCENTS_LIGHT : ACCENTS;
+    const p = palette[name] || palette.cyan;
     const root = document.documentElement.style;
     root.setProperty("--color-accent", p.a);
     root.setProperty("--color-accent-2", p.b);
@@ -261,9 +260,27 @@ export const useCharacterStore = defineStore("character", () => {
     root.setProperty("--color-accent-glow", p.glow);
   }
 
+  function applyTheme(t: Theme) {
+    document.documentElement.dataset.theme = t;
+    applyAccent(accent.value);
+  }
+  function setTheme(t: Theme) {
+    theme.value = t;
+    try {
+      localStorage.setItem(THEME_KEY, t);
+    } catch {
+      /* storage full or unavailable */
+    }
+    applyTheme(t);
+  }
+  function toggleTheme() {
+    setTheme(theme.value === "dark" ? "light" : "dark");
+  }
+
   const BG_MODES = ["rain", "grid", "solid"] as const;
   function toggleBgMode() {
-    const next = BG_MODES[(BG_MODES.indexOf(bgMode.value) + 1) % BG_MODES.length];
+    const next =
+      BG_MODES[(BG_MODES.indexOf(bgMode.value) + 1) % BG_MODES.length];
     bgMode.value = next ?? "rain";
   }
 
@@ -289,6 +306,7 @@ export const useCharacterStore = defineStore("character", () => {
     char,
     accent,
     bgMode,
+    theme,
     hpMax,
     hpPct,
     statSum,
@@ -319,6 +337,9 @@ export const useCharacterStore = defineStore("character", () => {
     setPortrait,
     setAccent,
     applyAccent,
+    applyTheme,
+    setTheme,
+    toggleTheme,
     toggleBgMode,
     reset,
     exportCharacter,

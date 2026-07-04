@@ -23,7 +23,7 @@ const store = useCharacterStore()
       <div
         v-for="cw in store.char.cyberware"
         :key="cw.id"
-        class="flex items-center gap-2 border border-line bg-black/25 px-2 py-1.5"
+        class="flex items-center gap-2 border border-line bg-inset/25 px-2 py-1.5"
       >
         <span class="font-mono text-[11px] font-bold text-accent-2">⬡</span>
         <input
@@ -34,7 +34,7 @@ const store = useCharacterStore()
         />
         <input
           :value="cw.cost"
-          class="w-[42px] border border-line bg-black/40 p-[3px] text-center font-mono text-[13px] font-bold text-accent-2 outline-none focus:border-accent-2"
+          class="w-[42px] border border-line bg-inset/40 p-[3px] text-center font-mono text-[13px] font-bold text-accent-2 outline-none focus:border-accent-2"
           @change="
             store.updateCyber(cw.id, { cost: parseInt(($event.target as HTMLInputElement).value) || 0 })
           "

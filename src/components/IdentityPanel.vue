@@ -42,14 +42,14 @@ function onRoleChange(e: Event) {
         <input
           v-model="store.char.nom"
           placeholder="Inconnu·e"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-display text-lg font-semibold text-txt outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-display text-lg font-semibold text-txt outline-none focus:border-accent"
         />
       </label>
       <label class="block">
         <span class="font-mono text-[10px] tracking-[0.16em] text-dim uppercase">Genre</span>
         <select
           v-model="store.char.genre"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
         >
           <option value="">—</option>
           <option v-for="g in GENDERS" :key="g.key" :value="g.key">{{ g.label }}</option>
@@ -60,14 +60,14 @@ function onRoleChange(e: Event) {
         <input
           v-model="store.char.alias"
           placeholder="@street_name"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-mono text-[15px] font-semibold text-accent outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-mono text-[15px] font-semibold text-accent outline-none focus:border-accent"
         />
       </label>
       <label class="block">
         <span class="font-mono text-[10px] tracking-[0.16em] text-dim uppercase">Rôle</span>
         <select
           :value="store.char.role"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
           @change="onRoleChange"
         >
           <option value="">—</option>
@@ -79,7 +79,7 @@ function onRoleChange(e: Event) {
         <input
           v-model="store.char.origine"
           placeholder="Corpo / Nomade / Rue…"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-display text-[15px] font-medium text-txt outline-none focus:border-accent"
         />
       </label>
       <label class="block">
@@ -87,7 +87,7 @@ function onRoleChange(e: Event) {
         <input
           v-model="store.char.age"
           placeholder="—"
-          class="mt-[5px] w-full border border-line bg-black/35 px-[11px] py-[9px] font-mono text-[15px] font-medium text-txt outline-none focus:border-accent"
+          class="mt-[5px] w-full border border-line bg-inset/35 px-[11px] py-[9px] font-mono text-[15px] font-medium text-txt outline-none focus:border-accent"
         />
       </label>
 

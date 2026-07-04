@@ -11,6 +11,7 @@
   --color-accent-2: #ff2d7e;
   --color-accent-soft: rgba(34, 224, 255, 0.12);
   --color-accent-glow: rgba(34, 224, 255, 0.45);
+  --color-inset: #000000;
 
   --font-display: "Rajdhani", system-ui, sans-serif;
   --font-mono: "Share Tech Mono", monospace;
@@ -114,6 +115,27 @@
   }
 }
 
+:root {
+  --color-highlight: rgba(255, 255, 255, 0.06);
+  --scan-alpha: 0.12;
+}
+
+/* Mode clair : surcharge la palette de base (les variables d'accent restent
+   gérées séparément par applyAccent(), qui pioche dans ACCENTS_LIGHT). */
+[data-theme="light"] {
+  --color-bg: #eef1f5;
+  --color-panel: #ffffff;
+  --color-panel-2: #f4f6f9;
+  --color-line: rgba(20, 40, 60, 0.14);
+  --color-txt: #141b22;
+  --color-dim: #5b6b7a;
+  --color-highlight: rgba(10, 20, 30, 0.06);
+  /* Gris-bleu clair plutôt que noir : du noir translucide sur panneau blanc
+     donnait un gris moyen plat pour les inputs/encarts encastrés. */
+  --color-inset: #dbe1e8;
+  --scan-alpha: 0.035;
+}
+
 body {
   margin: 0;
   background: var(--color-bg);
@@ -132,6 +154,11 @@ textarea::placeholder {
   color: #3f4d5c;
 }
 
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: #8a97a3;
+}
+
 ::-webkit-scrollbar {
   width: 9px;
   height: 9px;
@@ -145,6 +172,10 @@ textarea::placeholder {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(20, 40, 60, 0.25);
 }
 
 /* corner-clipped panel edge accent, reused across panel headers */
@@ -165,4 +196,16 @@ textarea::placeholder {
   height: 2px;
   background: var(--color-accent-2);
   box-shadow: 0 0 8px var(--color-accent-2);
+}
+
+/* Fines lignes CRT superposées à l'app ; intensité pilotée par --scan-alpha
+   (plus faible en mode clair, où le multiply assombrit davantage un fond clair). */
+.scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgb(0 0 0 / var(--scan-alpha)) 3px,
+    rgba(0, 0, 0, 0) 4px
+  );
 }

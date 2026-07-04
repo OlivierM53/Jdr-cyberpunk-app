@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useCharacterStore } from '@/stores/character'
-import { ACCENTS } from '@/data/cyberpunk'
+import { ACCENTS, ACCENTS_LIGHT } from '@/data/cyberpunk'
 
 const store = useCharacterStore()
 const canvas = ref<HTMLCanvasElement | null>(null)
@@ -19,16 +19,25 @@ let segmentWeights: number[] = []
 let pulses: { seg: number; t: number; s: number }[] = []
 let t = 0
 let hackColor = ACCENTS.cyan.a
+let fadeRainColor = 'rgba(6,8,12,0.085)'
+let fadeGridColor = 'rgba(6,8,12,0.14)'
+let solidColor = '#06080c'
+let flashColor = '#ffffff'
 
 const CHARS = 'ｱｲｳｴｵｶｷｸｹｺ0123456789ABCDEF<>/\\[]{}#$%&*+=:;'
 
-watch(
-  () => store.accent,
-  (name) => {
-    hackColor = ACCENTS[name]?.a || ACCENTS.cyan.a
-  },
-  { immediate: true },
-)
+function refreshThemeColors() {
+  const light = store.theme === 'light'
+  const palette = light ? ACCENTS_LIGHT : ACCENTS
+  hackColor = palette[store.accent]?.a || palette.cyan.a
+  fadeRainColor = light ? 'rgba(238,241,245,0.085)' : 'rgba(6,8,12,0.085)'
+  fadeGridColor = light ? 'rgba(238,241,245,0.14)' : 'rgba(6,8,12,0.14)'
+  solidColor = light ? '#eef1f5' : '#06080c'
+  flashColor = light ? '#0d141b' : '#ffffff'
+}
+
+watch(() => store.accent, refreshThemeColors, { immediate: true })
+watch(() => store.theme, refreshThemeColors)
 
 watch(
   () => store.bgMode,
@@ -193,7 +202,7 @@ function buildNetwork(cv: HTMLCanvasElement) {
 function drawRain() {
   const cv = canvas.value
   if (!cv || !ctx) return
-  ctx.fillStyle = 'rgba(6,8,12,0.085)'
+  ctx.fillStyle = fadeRainColor
   ctx.fillRect(0, 0, cv.width, cv.height)
   ctx.font = "13px 'Share Tech Mono', monospace"
   for (let i = 0; i < cols; i++) {
@@ -204,7 +213,7 @@ function drawRain() {
     const y = drop * 14
     if (Math.random() < 0.02) {
       ctx.globalAlpha = 1
-      ctx.fillStyle = '#ffffff'
+      ctx.fillStyle = flashColor
     } else {
       ctx.globalAlpha = 0.32
       ctx.fillStyle = hackColor
@@ -227,7 +236,7 @@ function drawRain() {
 function drawGrid() {
   const cv = canvas.value
   if (!cv || !ctx) return
-  ctx.fillStyle = 'rgba(6,8,12,0.14)'
+  ctx.fillStyle = fadeGridColor
   ctx.fillRect(0, 0, cv.width, cv.height)
   t += 0.05
 
@@ -265,7 +274,7 @@ function drawGrid() {
     const x = s.ax + (s.bx - s.ax) * p.t
     const y = s.ay + (s.by - s.ay) * p.t
     ctx.shadowBlur = 8
-    ctx.fillStyle = Math.random() < 0.4 ? '#ffffff' : hackColor
+    ctx.fillStyle = Math.random() < 0.4 ? flashColor : hackColor
     ctx.fillRect(x - 2, y - 2, 4, 4)
     p.t += p.s
     if (p.t > 1) {
@@ -280,7 +289,7 @@ function drawGrid() {
 function drawSolid() {
   const cv = canvas.value
   if (!cv || !ctx) return
-  ctx.fillStyle = '#06080c'
+  ctx.fillStyle = solidColor
   ctx.fillRect(0, 0, cv.width, cv.height)
 }
 
@@ -314,15 +323,6 @@ onBeforeUnmount(() => {
     class="pointer-events-none fixed inset-0 z-0 h-screen w-screen opacity-50"
   ></canvas>
   <div
-    class="animate-scan pointer-events-none fixed inset-0 z-[9999] mix-blend-multiply"
-    style="
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0) 0px,
-        rgba(0, 0, 0, 0) 2px,
-        rgba(0, 0, 0, 0.12) 3px,
-        rgba(0, 0, 0, 0) 4px
-      );
-    "
+    class="scanlines animate-scan pointer-events-none fixed inset-0 z-[9999] mix-blend-multiply"
   ></div>
 </template>

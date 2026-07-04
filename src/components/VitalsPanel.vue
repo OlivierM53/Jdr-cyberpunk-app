@@ -33,7 +33,7 @@ function onEddiesInput(e: Event) {
           {{ store.char.hp }}<span class="text-xs text-dim"> / {{ store.hpMax }}</span>
         </span>
       </div>
-      <div class="relative h-[9px] overflow-hidden border border-line bg-black/50">
+      <div class="relative h-[9px] overflow-hidden border border-line bg-inset/50">
         <div
           class="absolute inset-y-0 left-0"
           :style="{
@@ -45,19 +45,19 @@ function onEddiesInput(e: Event) {
       </div>
       <div class="mt-2 flex gap-1.5">
         <button
-          class="flex-1 cursor-pointer border border-line bg-black/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent-2 hover:text-accent-2"
+          class="flex-1 cursor-pointer border border-line bg-inset/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent-2 hover:text-accent-2"
           @click="store.setHp(-1)"
         >
           −
         </button>
         <button
-          class="flex-1 cursor-pointer border border-line bg-black/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent-2 hover:text-accent-2"
+          class="flex-1 cursor-pointer border border-line bg-inset/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent-2 hover:text-accent-2"
           @click="store.setHp(1)"
         >
           +
         </button>
         <button
-          class="flex-[2] cursor-pointer border border-line bg-black/40 py-1.5 font-display text-[10px] font-semibold tracking-[0.12em] text-dim uppercase hover:border-accent-2 hover:text-accent-2"
+          class="flex-[2] cursor-pointer border border-line bg-inset/40 py-1.5 font-display text-[10px] font-semibold tracking-[0.12em] text-dim uppercase hover:border-accent-2 hover:text-accent-2"
           @click="store.fullHeal()"
         >
           Soin total
@@ -77,7 +77,7 @@ function onEddiesInput(e: Event) {
           /><span class="text-xs text-dim"> / {{ store.humanityMax }}</span>
         </span>
       </div>
-      <div class="relative h-[9px] overflow-hidden border border-line bg-black/50">
+      <div class="relative h-[9px] overflow-hidden border border-line bg-inset/50">
         <div
           class="absolute inset-y-0 left-0"
           :style="{
@@ -89,13 +89,13 @@ function onEddiesInput(e: Event) {
       </div>
       <div class="mt-2 flex gap-1.5">
         <button
-          class="flex-1 cursor-pointer border border-line bg-black/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
+          class="flex-1 cursor-pointer border border-line bg-inset/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
           @click="store.setHumanity(-1)"
         >
           −
         </button>
         <button
-          class="flex-1 cursor-pointer border border-line bg-black/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
+          class="flex-1 cursor-pointer border border-line bg-inset/40 py-1.5 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
           @click="store.setHumanity(1)"
         >
           +
@@ -105,11 +105,11 @@ function onEddiesInput(e: Event) {
 
     <!-- ARMURE -->
     <div class="grid grid-cols-2 gap-2.5">
-      <div class="border border-line bg-black/25 px-2.5 py-2">
+      <div class="border border-line bg-inset/25 px-2.5 py-2">
         <div class="font-mono text-[9px] tracking-[0.14em] text-dim">ARMURE · TÊTE</div>
         <div class="mt-1.5 flex items-center gap-2">
           <button
-            class="h-6 w-6 cursor-pointer border border-line bg-black/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
+            class="h-6 w-6 cursor-pointer border border-line bg-inset/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
             @click="store.setArmor('armorHead', -1)"
           >
             −
@@ -118,18 +118,18 @@ function onEddiesInput(e: Event) {
             store.char.armorHead
           }}</span>
           <button
-            class="h-6 w-6 cursor-pointer border border-line bg-black/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
+            class="h-6 w-6 cursor-pointer border border-line bg-inset/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
             @click="store.setArmor('armorHead', 1)"
           >
             +
           </button>
         </div>
       </div>
-      <div class="border border-line bg-black/25 px-2.5 py-2">
+      <div class="border border-line bg-inset/25 px-2.5 py-2">
         <div class="font-mono text-[9px] tracking-[0.14em] text-dim">ARMURE · CORPS</div>
         <div class="mt-1.5 flex items-center gap-2">
           <button
-            class="h-6 w-6 cursor-pointer border border-line bg-black/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
+            class="h-6 w-6 cursor-pointer border border-line bg-inset/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
             @click="store.setArmor('armorBody', -1)"
           >
             −
@@ -138,7 +138,7 @@ function onEddiesInput(e: Event) {
             store.char.armorBody
           }}</span>
           <button
-            class="h-6 w-6 cursor-pointer border border-line bg-black/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
+            class="h-6 w-6 cursor-pointer border border-line bg-inset/40 font-mono text-[13px] font-semibold text-txt hover:border-accent"
             @click="store.setArmor('armorBody', 1)"
           >
             +

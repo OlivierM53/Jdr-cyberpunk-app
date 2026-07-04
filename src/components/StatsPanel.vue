@@ -26,7 +26,7 @@ const store = useCharacterStore()
       <div
         v-for="d in STAT_DEFS"
         :key="d.key"
-        class="border border-line bg-black/25 p-3 pb-3.5"
+        class="border border-line bg-inset/25 p-3 pb-3.5"
       >
         <div class="flex items-baseline justify-between">
           <span class="flex items-center gap-1.5">
@@ -40,7 +40,7 @@ const store = useCharacterStore()
         <div class="my-0.5 mb-[9px] font-display text-[11px] font-medium tracking-[0.1em] text-dim uppercase">
           {{ d.name }}
         </div>
-        <div class="mb-[9px] h-[5px] overflow-hidden border border-line bg-black/50">
+        <div class="mb-[9px] h-[5px] overflow-hidden border border-line bg-inset/50">
           <div
             class="h-full"
             :style="{
@@ -52,13 +52,13 @@ const store = useCharacterStore()
         </div>
         <div class="flex gap-1.5">
           <button
-            class="flex-1 cursor-pointer border border-line bg-black/40 py-1 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
+            class="flex-1 cursor-pointer border border-line bg-inset/40 py-1 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
             @click="store.setStat(d.key, -1)"
           >
             −
           </button>
           <button
-            class="flex-1 cursor-pointer border border-line bg-black/40 py-1 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
+            class="flex-1 cursor-pointer border border-line bg-inset/40 py-1 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
             @click="store.setStat(d.key, 1)"
           >
             +

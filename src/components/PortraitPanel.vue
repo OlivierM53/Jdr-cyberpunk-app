@@ -62,7 +62,7 @@ function onRemove(e: Event) {
     <div class="mb-2.5 font-mono text-[9px] tracking-[0.24em] text-dim">// PORTRAIT</div>
 
     <div
-      class="group relative block h-[250px] w-full cursor-pointer border border-line bg-black/20 bg-cover bg-center"
+      class="group relative block h-[250px] w-full cursor-pointer border border-line bg-inset/20 bg-cover bg-center"
       style="clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%)"
       :style="{
         outline: dragOver ? '2px solid var(--color-accent)' : 'none',
@@ -82,7 +82,7 @@ function onRemove(e: Event) {
       </div>
       <button
         v-else
-        class="absolute right-2 bottom-2 cursor-pointer border border-line bg-black/65 px-2 py-1 font-mono text-[10px] text-txt hover:border-accent-2 hover:text-accent-2"
+        class="absolute right-2 bottom-2 cursor-pointer border border-line bg-inset/65 px-2 py-1 font-mono text-[10px] text-txt hover:border-accent-2 hover:text-accent-2"
         @click="onRemove"
       >
         Retirer

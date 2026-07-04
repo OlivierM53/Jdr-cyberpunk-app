@@ -8,7 +8,7 @@ import AppHeader from '@/components/AppHeader.vue'
 
 const store = useCharacterStore()
 
-onMounted(() => store.applyAccent(store.accent))
+onMounted(() => store.applyTheme(store.theme))
 </script>
 
 <template>

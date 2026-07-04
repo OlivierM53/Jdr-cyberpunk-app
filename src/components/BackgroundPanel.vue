@@ -26,7 +26,7 @@ const store = useCharacterStore()
         }}</span>
         <textarea
           :value="store.char.bg[bf.key] || ''"
-          class="min-h-[76px] resize-y border border-line bg-black/35 px-3 py-2.5 font-display text-sm leading-relaxed text-txt outline-none focus:border-accent-2"
+          class="min-h-[76px] resize-y border border-line bg-inset/35 px-3 py-2.5 font-display text-sm leading-relaxed text-txt outline-none focus:border-accent-2"
           @change="store.setBg(bf.key, ($event.target as HTMLTextAreaElement).value)"
         ></textarea>
       </label>

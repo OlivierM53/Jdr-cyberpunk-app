@@ -34,19 +34,19 @@ const store = useCharacterStore()
         <input
           :value="wp.name"
           placeholder="Désignation de l'arme…"
-          class="min-w-0 border border-line bg-black/30 px-[11px] py-2 font-display text-sm font-medium text-txt outline-none focus:border-accent"
+          class="min-w-0 border border-line bg-inset/30 px-[11px] py-2 font-display text-sm font-medium text-txt outline-none focus:border-accent"
           @change="store.updateWeapon(wp.id, { name: ($event.target as HTMLInputElement).value })"
         />
         <input
           :value="wp.dmg"
           placeholder="2d6"
-          class="border border-line bg-black/40 px-2 py-2 text-center font-mono text-[15px] font-bold text-accent-2 outline-none focus:border-accent-2"
+          class="border border-line bg-inset/40 px-2 py-2 text-center font-mono text-[15px] font-bold text-accent-2 outline-none focus:border-accent-2"
           @change="store.updateWeapon(wp.id, { dmg: ($event.target as HTMLInputElement).value })"
         />
         <input
           :value="wp.atk"
           placeholder="1"
-          class="border border-line bg-black/40 px-2 py-2 text-center font-mono text-[15px] font-bold text-txt outline-none focus:border-accent"
+          class="border border-line bg-inset/40 px-2 py-2 text-center font-mono text-[15px] font-bold text-txt outline-none focus:border-accent"
           @change="
             store.updateWeapon(wp.id, { atk: parseInt(($event.target as HTMLInputElement).value) || 0 })
           "

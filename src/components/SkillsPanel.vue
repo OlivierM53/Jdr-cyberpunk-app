@@ -42,7 +42,7 @@ const skillList = computed(() => {
       <span class="font-mono text-[10px] tracking-[0.14em] text-dim">PTS ATTRIBUÉS</span>
       <span class="font-mono text-[15px] font-bold text-accent">{{ store.skillSum }}</span>
       <input v-model="skillQuery" placeholder="rechercher…"
-        class="w-full border border-line bg-black/40 px-2.5 py-1.5 font-mono text-xs font-medium text-txt outline-none focus:border-accent sm:w-40" />
+        class="w-full border border-line bg-inset/40 px-2.5 py-1.5 font-mono text-xs font-medium text-txt outline-none focus:border-accent sm:w-40" />
     </div>
 
     <div class="mb-4 flex flex-wrap gap-1.5">
@@ -70,7 +70,7 @@ const skillList = computed(() => {
         <span class="font-mono text-[11px] text-dim" title="base de stat">{{ sk.base }}</span>
         <span class="font-mono text-[11px] text-dim">+</span>
         <button
-          class="h-5 w-5 cursor-pointer border border-line bg-black/40 font-mono text-[11px] leading-none font-semibold text-txt hover:border-accent"
+          class="h-5 w-5 cursor-pointer border border-line bg-inset/40 font-mono text-[11px] leading-none font-semibold text-txt hover:border-accent"
           @click="store.setSkill(sk.name, -1)">
           −
         </button>
@@ -78,7 +78,7 @@ const skillList = computed(() => {
           sk.level
         }}</span>
         <button
-          class="h-5 w-5 cursor-pointer border border-line bg-black/40 font-mono text-[11px] leading-none font-semibold text-txt hover:border-accent"
+          class="h-5 w-5 cursor-pointer border border-line bg-inset/40 font-mono text-[11px] leading-none font-semibold text-txt hover:border-accent"
           @click="store.setSkill(sk.name, 1)">
           +
         </button>

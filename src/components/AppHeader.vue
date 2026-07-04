@@ -11,7 +11,7 @@ const accentList = Object.keys(ACCENTS) as AccentName[]
 const BG_MODE_LABELS: Record<string, string> = {
   rain: '≋ PLUIE',
   grid: '⬡ RÉSEAU',
-  solid: '■ SOMBRE',
+  solid: '■ CLEAN',
 }
 </script>
 
@@ -82,6 +82,14 @@ const BG_MODE_LABELS: Record<string, string> = {
     </div>
 
     <button
+      title="Changer de thème"
+      class="cursor-pointer border border-line bg-transparent px-3 py-2 text-center font-mono text-[11px] font-semibold tracking-[0.12em] text-dim hover:border-accent hover:text-accent"
+      @click="store.toggleTheme()"
+    >
+      {{ store.theme === 'dark' ? '☀ CLAIR' : '☾ SOMBRE' }}
+    </button>
+
+    <button
       title="Changer le fond"
       class="min-w-[104px] cursor-pointer border border-line bg-transparent px-3 py-2 text-center font-mono text-[11px] font-semibold tracking-[0.12em] text-dim hover:border-accent hover:text-accent"
       @click="store.toggleBgMode()"
@@ -95,7 +103,7 @@ const BG_MODE_LABELS: Record<string, string> = {
         :key="name"
         :title="name"
         class="relative h-[30px] w-[30px] cursor-pointer border-0 border-r border-line last:border-r-0 hover:brightness-140"
-        :style="{ background: store.accent === name ? 'rgba(255,255,255,.06)' : 'transparent' }"
+        :style="{ background: store.accent === name ? 'var(--color-highlight)' : 'transparent' }"
         @click="store.setAccent(name)"
       >
         <span

@@ -23,12 +23,12 @@ const store = useCharacterStore()
       <div
         v-for="eq in store.char.equipment"
         :key="eq.id"
-        class="flex items-center gap-2 border border-line bg-black/25 px-2 py-1.5"
+        class="flex items-center gap-2 border border-line bg-inset/25 px-2 py-1.5"
       >
         <input
           :value="eq.type"
           placeholder="Type"
-          class="w-16 border border-line bg-black/40 px-[5px] py-1 font-mono text-[10px] font-semibold tracking-[0.05em] text-accent uppercase outline-none focus:border-accent"
+          class="w-16 border border-line bg-inset/40 px-[5px] py-1 font-mono text-[10px] font-semibold tracking-[0.05em] text-accent uppercase outline-none focus:border-accent"
           @change="store.updateEquip(eq.id, { type: ($event.target as HTMLInputElement).value })"
         />
         <input
@@ -39,7 +39,7 @@ const store = useCharacterStore()
         />
         <input
           :value="eq.qty"
-          class="w-[38px] border border-line bg-black/40 p-[3px] text-center font-mono text-[13px] font-bold text-txt outline-none focus:border-accent"
+          class="w-[38px] border border-line bg-inset/40 p-[3px] text-center font-mono text-[13px] font-bold text-txt outline-none focus:border-accent"
           @change="
             store.updateEquip(eq.id, { qty: parseInt(($event.target as HTMLInputElement).value) || 0 })
           "
