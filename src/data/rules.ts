@@ -1178,6 +1178,66 @@ export const RULE_TABS: RuleTab[] = [
               },
             ],
           },
+
+          {
+            name: "Pare-feu neural",
+            price: "Onéreux",
+            humanityCost: "2d6",
+            notes: [
+              {
+                description:
+                  "Blindage logiciel protégeant le neuroport de l'utilisateur.",
+              },
+              {
+                term: "Contre-intrusion",
+                description:
+                  "Quand une cible tente d'éjecter l'utilisateur de son neuroport, celui-ci gagne +2 à son jet d'Interface pour résister.",
+              },
+              {
+                term: "Neuroport durci",
+                description:
+                  "Un Netrunner qui tente de pirater le neuroport de l'utilisateur voit le SD de sa première percée augmenté de 2.",
+              },
+            ],
+          },
+          {
+            name: "Accélérateur d'interface",
+            price: "Très onéreux",
+            humanityCost: "4d6",
+            notes: [
+              {
+                description:
+                  "Overclocking neural bricolé qui pousse le système nerveux au-delà de ses limites. Le cerveau n'est pas fait pour encaisser ce rythme.",
+              },
+              {
+                term: "Surcadence réseau",
+                description:
+                  "S'active avec une action. Pendant 3 tours, l'utilisateur peut disposer d'un actions virtuelle supplémentaire. Se recharge après un repos long.",
+              },
+              {
+                term: "Surchauffe neurale",
+                description:
+                  "Chaque fois que l'utilisateur emploie son action virtuelle supplémentaire dans un tour, il subit 2d6 dégâts ignorant l'armure. À lui de juger si la vitesse vaut la douleur.",
+              },
+            ],
+          },
+
+          {
+            name: "Protocole sentinelle",
+            price: "Onéreux",
+            humanityCost: "2d6",
+            notes: [
+              {
+                description:
+                  "Programme de veille qui surveille le réseau autour de l'utilisateur et de ses alliés.",
+              },
+              {
+                term: "Contre-connexion",
+                description:
+                  "Quand un Netrunner se connecte à un allié à portée de Connexion mais échoue son jet de Connexion (il est connecté mais repéré), l'utilisateur peut immédiatement tenter de le déconnecter de force. Jet d'Interface de l'utilisateur contre Interface + 1d10 de l'intrus : en cas de réussite, l'intrus est éjecté de la cible. Une fois par combat.",
+              },
+            ],
+          },
         ],
       },
     ],
