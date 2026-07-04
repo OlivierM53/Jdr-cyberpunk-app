@@ -1079,7 +1079,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Perfusion d'urgence",
                 description:
-                  "La première fois dans un combat où l'utilisateur passe sous 50% de ses PS, il récupère automatiquement 1d6 PS à la fin de son tour. Se recharge après une heure si le propriétaire a plus de 50% de ses PS.",
+                  "La première fois dans un combat où l'utilisateur passe sous 50% de ses PS, il récupère automatiquement 1d6/2 + 3 PS à la fin de son tour et du suivant. Se recharge après une heure si le propriétaire a plus de 50% de ses PS.",
               },
               {
                 term: "Coagulation assistée",
@@ -1624,6 +1624,127 @@ export const RULE_TABS: RuleTab[] = [
           ["4", "Votre amour a été emprisonné ou exilé."],
           ["5", "Votre amour vous a quitté pour quelqu'un d'autre."],
           ["6", "Vous n'avez pas eu d'amour, ce n'est pas votre truc."],
+        ],
+      },
+    ],
+  },
+  {
+    id: "piratage",
+    label: "Piratage",
+    accent: "accent",
+    blocks: [
+      { kind: "heading", text: "Actions virtuelles" },
+      {
+        kind: "paragraph",
+        text:
+          "Les Netrunners peuvent effectuer 1 action réelle ou jusqu'à 3 actions virtuelles pendant leur tour.",
+      },
+      {
+        kind: "table",
+        headers: ["Action", "Description"],
+        rows: [
+          [
+            "Connexion",
+            "Se connecter au neuroport d'une cible dans un rayon de 50 m. Interface + 1D10 contre VOL + 1D10 de la cible. Si le Netrunner échoue, il se connecte, mais la cible le repère.",
+          ],
+          [
+            "Déconnexion",
+            "Se déconnecter en toute sécurité du neuroport d'une cible.",
+          ],
+          [
+            "Percée",
+            "Franchir une barrière du neuroport d'une cible. Interface + 1D10 contre SD de la barrière.",
+          ],
+          [
+            "Piratage rapide",
+            "Effectuer un piratage rapide. Le Netrunner doit avoir préalablement percé toutes les barrières. Il ne peut effectuer qu'un seul piratage rapide par cible et par tour. Interface + 1D10 contre SD du piratage rapide.",
+          ],
+        ],
+      },
+      {
+        kind: "definitions",
+        entries: [
+          {
+            term: "Éjection du Netrunner",
+            description:
+              "Une cible qui a conscience de subir un piratage rapide peut tenter d'éjecter le Netrunner en faisant un jet de VOL + Concentration + 1D10 contre Interface + 1D10 du Netrunner.",
+          },
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Piratages rapides simples (SD 6)" },
+      {
+        kind: "table",
+        headers: ["Piratage", "Effet"],
+        rows: [
+          [
+            "Limitation des mouvements",
+            "Le MOUV de la cible est réduit de 1 pendant 60 secondes (20 rounds). Si le MOUV atteint 0, la cible ne peut plus faire d'action de mouvement.",
+          ],
+          [
+            "Choc sonore",
+            "Inflige la blessure critique Oreille endommagée, sans les dégâts bonus, pendant 60 secondes (20 rounds).",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Piratages rapides standards (SD 8)" },
+      {
+        kind: "table",
+        headers: ["Piratage", "Effet"],
+        rows: [
+          [
+            "Surchauffe",
+            "La cible prend feu, subissant 4 points de dégâts directement appliqués à ses PS à la fin de chacun de ses tours, jusqu'à ce que le feu soit éteint. Les dégâts ignorent l'armure mais ne la perforent pas. Pour éteindre le feu : une action (1 Att/round) pendant le tour de la cible.",
+          ],
+          [
+            "Court-circuit",
+            "Le MJ choisit trois implants cybernétiques (qui ne peuvent pas être un cyberbras, une cyberjambe, un cyberœil, un kit cyberaudio, un neuroport ou un neuroport pour cyberconsole). Les implants choisis cessent de fonctionner pendant 60 secondes (20 rounds).",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Piratages rapides complexes (SD 10)" },
+      {
+        kind: "table",
+        headers: ["Piratage", "Effet"],
+        rows: [
+          [
+            "Dysfonctionnement de matériel cybernétique",
+            "Le Netrunner sélectionne un implant cybernétique de la cible qui n'est pas un neuroport ou un neuroport pour cyberconsole. Il devient inopérant pendant 60 secondes (20 rounds). Un cybermembre en panne pend mollement comme un membre de chair déboîté. Les extensions de l'implant cessent aussi de fonctionner.",
+          ],
+          [
+            "Sifflet",
+            "Au début de son prochain tour, la cible est obligée d'effectuer une action de mouvement dictée par le Netrunner. Fonctionne uniquement si la cible n'a pas conscience d'être connectée. On ne peut pas contraindre la cible à se mettre physiquement en danger.",
+          ],
+          [
+            "Ralentissement",
+            "Le MOUV de la cible est réduit de 1D6 pendant 60 secondes (20 rounds). Si le MOUV atteint 0, la cible ne peut plus faire d'action de mouvement.",
+          ],
+          [
+            "Surmenage synaptique",
+            "La cible subit 3D6 points de dégâts directement appliqués à ses PS. Les dégâts ignorent l'armure mais ne la perforent pas.",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Piratages rapides avancés (SD 12)" },
+      {
+        kind: "table",
+        headers: ["Piratage", "Effet"],
+        rows: [
+          [
+            "Possession",
+            "Le Netrunner contrôle l'action de mouvement et l'autre action de la cible durant son prochain tour, la seule restriction étant les capacités physiques de la cible. Les jets sont réalisés avec les CARAC et compétences de la cible, et non celles du Netrunner qui la possède.",
+          ],
+          [
+            "Éjection d'éclat",
+            "Le Netrunner désinstalle de force et éjecte une puce de la cible, qui tombe dans une case adjacente. Ne fonctionne pas si l'utilisateur possède un capuchon de puce (ou s'il a posé du scotch par-dessus l'emplacement).",
+          ],
+          [
+            "Redémarrage système",
+            "La cible devient inconsciente pendant 60 secondes (20 rounds), ou jusqu'à ce qu'elle subisse des dégâts, ce qui la réveille. Elle tombe au sol.",
+          ],
         ],
       },
     ],
