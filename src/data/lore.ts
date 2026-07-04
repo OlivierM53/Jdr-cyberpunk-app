@@ -438,7 +438,7 @@ export const LORE_TABS: LoreTab[] = [
             "Personne vivant en marge de la loi, vendant ses compétences (combat, hacking, infiltration) au plus offrant.",
         },
         {
-          term: "Eddies ($)",
+          term: "Eddies (€$)",
           description: "Monnaie courante utilisée à Night City.",
         },
         {

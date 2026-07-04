@@ -66,7 +66,7 @@ export const STAT_DEFS: StatDef[] = [
     key: "CHA",
     name: "Chance",
     description:
-      "Vous obtenez autant de points de chance que cette stat. Chaque point de cahnce peut etre consommé pour avoir un bonus de 1 à un jet de compétance.",
+      "Vous obtenez autant de points de chance que cette stat. Chaque point de chance peut être consommé pour avoir un bonus de 1 à un jet de compétence.",
   },
   {
     key: "MOUV",
@@ -373,8 +373,8 @@ export interface RoleDef {
 export const ROLES: Record<RoleKey, RoleDef> = {
   Netrunner: {
     description:
-      `Publiez les claviers et les écrans tactiles. Vous Pirattez les gens avec votre cerveau !
-    Vous 4 en Interface et 3 actions virtuelles par tour pour effectuer des priatages rapides.`,
+      `Oubliez les claviers et les écrans tactiles. Vous piratez les gens avec votre cerveau !
+    Vous avez 4 en Interface et 3 actions virtuelles par tour pour effectuer des piratages rapides.`,
     stats: {
       CHA: 8,
       COR: 4,

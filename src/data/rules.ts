@@ -205,34 +205,34 @@ export const RULE_TABS: RuleTab[] = [
         kind: "formula",
         lines: ["DEX + compétence Esquive + 1D10 (défenseur)"],
       },
-      { kind: "heading", text: "Attaque cinétique" },
+      { kind: "heading", text: "Arme cinétique" },
       {
         kind: "paragraph",
         text:
           "Les points de dégâts des blessures critiques infligés par les armes cinétiques augmentent de 5. L'utilisateur peut faire ricocher les tirs avec un malus de -4.",
       },
-      { kind: "heading", text: "Attaque Technique" },
+      { kind: "heading", text: "Arme technique" },
       {
         kind: "paragraph",
         text:
-          "Les armes techniques nécéssite d'être chargé avant de tirer. L'utilisateur doit utiliser son action ou son action de mouvement pour charger l'arme jusqu'au prochain tour. Un tir d'arme technique ignore la moitié de l'armure de la cible et passe au travers des couverts.",
+          "Les armes techniques nécessitent d'être chargées avant de tirer. L'utilisateur doit utiliser son action ou son action de mouvement pour charger l'arme jusqu'au prochain tour. Un tir d'arme technique ignore la moitié de l'armure de la cible et passe au travers des couverts.",
       },
-      { kind: "heading", text: "Attaque intéligentes" },
+      { kind: "heading", text: "Arme intelligente" },
       {
         kind: "paragraph",
         text:
-          "+ 1 au jet d'attaque. Peut recevoir des munitons intéligentes améliorées.",
+          "+ 1 au jet d'attaque. Peut recevoir des munitions intelligentes améliorées.",
       },
-      { kind: "heading", text: "Munitons intéligentes améliorées" },
+      { kind: "heading", text: "Munitions intelligentes améliorées" },
       {
         kind: "paragraph",
         text:
-          "Quand une arme intéligente est équipée de munitons intéligentes améliorées, l'utilisateur ignore les pénalitées causées par l'obscurité, la fumé, le brouillard et tou ce qui brouille le champs de vision.",
+          "Quand une arme intelligente est équipée de munitions intelligentes améliorées, l'utilisateur ignore les pénalités causées par l'obscurité, la fumée, le brouillard et tout ce qui brouille le champ de vision.",
       },
       {
         kind: "paragraph",
         text:
-          "Si l'utilsateur d'une arme intéligente est équipée de munitons intéligentes améliorées rate un jet d'attaque de 5 ou moins, il peut imméditement réessayer de toucher la cible. Pour sa 2ème tentative, il fait un jt de 14 + 1d10 contre le SD d'origine. Les bonus ne s'appliquent pas mais les malus s'appliquent lors de ce jet.",
+          "Si l'utilisateur d'une arme intelligente équipée de munitions intelligentes améliorées rate un jet d'attaque de 5 ou moins, il peut immédiatement réessayer de toucher la cible. Pour sa 2ème tentative, il fait un jet de 14 + 1d10 contre le SD d'origine. Les bonus ne s'appliquent pas mais les malus s'appliquent lors de ce jet.",
       },
       { kind: "divider" },
       { kind: "heading", text: "Attaque de mêlée" },
@@ -301,7 +301,7 @@ export const RULE_TABS: RuleTab[] = [
     label: "Blessures",
     accent: "accent2",
     blocks: [
-      { kind: "heading", text: "Seuilles de blessures" },
+      { kind: "heading", text: "Seuils de blessures" },
       {
         kind: "table",
         headers: ["Type de blessure", "Seuil", "Effet", "SD de stabilisation"],
@@ -333,25 +333,22 @@ export const RULE_TABS: RuleTab[] = [
           {
             term: "Saignement",
             description:
-              `Dégâts infligés ignorant l'armure à la fin de chaque tour de la victime, peut être soigné via un jet de premiers secours SD 13 (ou chirurgie SD 10).
-            Dégâts de base : 1d6/2
-            Si un saignement est appliqué à une cible qui saigne déjà, les dégâts passent à 1d6 (seule la valeur de saignement la plus grande est conservée)
-            `,
+              "Dégâts infligés ignorant l'armure à la fin de chaque tour de la victime, peut être soigné via un jet de premiers secours SD 13 (ou chirurgie SD 10). Dégâts de base : 1d6/2. Si un saignement est appliqué à une cible qui saigne déjà, les dégâts passent à 1d6 (seule la valeur de saignement la plus grande est conservée).",
           },
           {
             term: "Blessures critiques",
             description:
-              "Si, lors d'un jet de dégâts, 2 dés affichent un 6, 5 points de dégats supplémentaires aini qu'une blessure critique aléatoire sont infligés.",
+              "Si, lors d'un jet de dégâts, 2 dés affichent un 6, 5 points de dégâts supplémentaires ainsi qu'une blessure critique aléatoire sont infligés.",
           },
           {
             term: "Soin d'urgence d'une blessure critique",
             description:
-              "Soigné en urgence une blessure critique supprime son effet pendant 24 heures (Sauf indication contraire). Ne peut être fait qu'une fois par blessure. Peut être fait sur soi-même et en combat (Prend une action).",
+              "Soigner en urgence une blessure critique supprime son effet pendant 24 heures (sauf indication contraire). Ne peut être fait qu'une fois par blessure. Peut être fait sur soi-même et en combat (prend une action).",
           },
           {
-            term: "Traitement d'un blessure critique",
+            term: "Traitement d'une blessure critique",
             description:
-              "Traité une blessure critique supprime définitivement son effet. Demande 1 heure de calme pour être effectué, et ne peut pas être fait sur soit même.",
+              "Traiter une blessure critique supprime définitivement son effet. Demande 1 heure de calme pour être effectué, et ne peut pas être fait sur soi-même.",
           },
         ],
       },
@@ -651,7 +648,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Tir chargé",
                 description:
-                  "Quand elle est chargée, elle a 2 Att/round et tire 3 munitions au lieu de 1 par jet d'attaque. Si elle continet moins de 3 munitions, le tir vide le cahrgeur. L'arme peut tirer à travers un couvert mince et ignore la moitié du PA de la cible (arrondi au supérieur).",
+                  "Quand elle est chargée, elle a 2 Att/round et tire 3 munitions au lieu de 1 par jet d'attaque. Si elle contient moins de 3 munitions, le tir vide le chargeur. L'arme peut tirer à travers un couvert mince et ignore la moitié du PA de la cible (arrondi au supérieur).",
               },
             ],
           },
@@ -671,7 +668,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Mauvaise qualité",
                 description:
-                  "S'enraye sur une jet de 1. Le tir part mais le tireur doit faire une action pour désenrayer l'arme.",
+                  "S'enraye sur un jet de 1. Le tir part mais le tireur doit faire une action pour désenrayer l'arme.",
               },
               {
                 term: "Arme cinétique",
@@ -706,7 +703,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Viser",
                 description:
-                  "Compétence Pistolet. Inflige 4d6 points de dégâts mais 1 Atk/round.",
+                  "Compétence Pistolet. Inflige 4d6 points de dégâts mais 1 Att/round.",
               },
             ],
           },
@@ -743,14 +740,14 @@ export const RULE_TABS: RuleTab[] = [
             stats: [
               { label: "DÉG", value: "3d6" },
               { label: "Att", value: "1" },
-              { label: "Chargeur", value: "24 (Pistolet M)" },
+              { label: "Chargeur", value: "24 (pistolet M)" },
               { label: "Main", value: "2" },
               { label: "Diss", value: "Non" },
             ],
             notes: [
               {
                 description:
-                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de dégâts à la place",
               },
               {
                 term: "Arme intelligente",
@@ -760,7 +757,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Tir automatique",
                 description:
-                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x3) pour calculer les dégâts. 10 munitions par jet d'attaque",
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votre jet pour toucher (maximum x3) pour calculer les dégâts. 10 munitions par jet d'attaque",
               },
             ],
           },
@@ -772,14 +769,14 @@ export const RULE_TABS: RuleTab[] = [
             stats: [
               { label: "DÉG", value: "5d6" },
               { label: "Att", value: "1" },
-              { label: "Chargeur", value: "24 (Fusil)" },
+              { label: "Chargeur", value: "24 (fusil)" },
               { label: "Main", value: "2" },
               { label: "Diss", value: "Non" },
             ],
             notes: [
               {
                 description:
-                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de dégâts à la place",
               },
               {
                 term: "Arme cinétique",
@@ -789,7 +786,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Tir automatique",
                 description:
-                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votre jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
               },
             ],
           },
@@ -808,7 +805,7 @@ export const RULE_TABS: RuleTab[] = [
             notes: [
               {
                 description:
-                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de gégâts à la place",
+                  "Consomme 3 munitions par tir, s'il y a moins de 3 munitions, l'arme tire les munitions restantes et inflige 2d6 de dégâts à la place",
               },
               {
                 term: "Arme intelligente",
@@ -818,7 +815,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Tir automatique",
                 description:
-                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votr jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
+                  "Compétence Tir automatique. Si le tir touche, lancez 2d6 et multipliez par la différence entre le SD et le résultat de votre jet pour toucher (maximum x4) pour calculer les dégâts. 10 munitions par jet d'attaque",
               },
             ],
           },
@@ -840,7 +837,7 @@ export const RULE_TABS: RuleTab[] = [
             ],
             notes: [
               { description: "Nécessite un cyberbras." },
-              { description: "Prend 2 emplacements de cyberbars" },
+              { description: "Prend 2 emplacements de cyberbras" },
               {
                 term: "Arme de mêlée",
                 description:
@@ -852,7 +849,7 @@ export const RULE_TABS: RuleTab[] = [
               },
               {
                 description:
-                  "Si l'utilisateur en installe sur 2 cyberbras, il peut faire des jets pour déplacer des objets, enfoncer des portes, faires les actions étrangler et lancer comme s'il avait COR 11",
+                  "Si l'utilisateur en installe sur 2 cyberbras, il peut faire des jets pour déplacer des objets, enfoncer des portes, étrangler et lancer comme s'il avait COR 11",
               },
             ],
           },
@@ -868,7 +865,7 @@ export const RULE_TABS: RuleTab[] = [
             notes: [
               { description: "Nécessite un cyberbras." },
               {
-                description: "Prend 2 emplacements de cyberbars",
+                description: "Prend 2 emplacements de cyberbras",
               },
               {
                 term: "Arme de mêlée",
@@ -914,7 +911,7 @@ export const RULE_TABS: RuleTab[] = [
               { description: "Vous pouvez en installer jusqu'à 3." },
               {
                 description:
-                  "Pour chaque auto-GLACE installée, le neurotport de l'utilisateur reçoit une barrière qui constitue une ligne de défense supplémentaire. Un Netrunner qui tente de pirater le neuroport de l'utilisateur doit dépenser une action irtuelle pour percer chaque barrière installée.",
+                  "Pour chaque auto-GLACE installée, le neuroport de l'utilisateur reçoit une barrière qui constitue une ligne de défense supplémentaire. Un Netrunner qui tente de pirater le neuroport de l'utilisateur doit dépenser une action virtuelle pour percer chaque barrière installée.",
               },
               {
                 term: "SD selon le nombre installé",
@@ -949,7 +946,7 @@ export const RULE_TABS: RuleTab[] = [
               },
               {
                 description:
-                  "Si vous avez 4 ou moins en COR, vous infligez 2d6 de dégâts lorsque que faites des jets de bagarre.",
+                  "Si vous avez 4 ou moins en COR, vous infligez 2d6 de dégâts supplémentaires lorsque vous faites des jets de bagarre.",
               },
               { description: "Vous pouvez endommager des couverts en acier." },
             ],
