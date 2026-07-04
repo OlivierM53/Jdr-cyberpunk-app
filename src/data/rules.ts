@@ -469,7 +469,7 @@ export const RULE_TABS: RuleTab[] = [
     label: "Armurerie",
     accent: "accent",
     blocks: [
-      { kind: "heading", text: "Armes" },
+      { kind: "heading", text: "Armes distances" },
       {
         kind: "items",
         items: [
@@ -822,6 +822,126 @@ export const RULE_TABS: RuleTab[] = [
         ],
       },
       { kind: "divider" },
+      { kind: "heading", text: "Armes Corps à Corps" },
+      {
+        kind: "items",
+        items: [
+          {
+            name: "Arasaka Monomoléculaire",
+            subtitle: "Sabre à deux mains",
+            price: "Onéreux",
+            stats: [
+              { label: "DÉG", value: "3d6" },
+              { label: "Att", value: "2" },
+              { label: "Type", value: "Tranchante" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Lame monomoléculaire",
+                description:
+                  "Le fil de la lame est si fin qu'il tranche presque n'importe quel matériau. L'arme ignore 3 points de PA de la cible.",
+              },
+              {
+                term: "Saignement",
+                description:
+                  "Si une cible subit 2 dégâts (après armure) d'armes tranchantes dans le même tour, elle subit un saignement (1d6/2, ou 1d6 si elle saigne déjà).",
+              },
+            ],
+          },
+
+          {
+            name: "Couteau de combat Militech",
+            subtitle: "Couteau",
+            price: "Bon marché",
+            stats: [
+              { label: "DÉG", value: "1d6" },
+              { label: "Att", value: "2" },
+              { label: "Type", value: "Tranchante" },
+              { label: "Main", value: "1" },
+              { label: "Diss", value: "Oui" },
+            ],
+            notes: [
+              {
+                term: "Dissimulable",
+                description:
+                  "Facile à cacher sur soi. +2 au jet de dissimulation.",
+              },
+              {
+                term: "Lancer",
+                description:
+                  "Peut être lancé comme une arme de jet (portée courte). Jet d'Athlétisme pour l'attaque.",
+              },
+              {
+                term: "Poignarder",
+                description:
+                  "Si vous n'avez pas été repéré, vous pouvez infliger 3d6 de dégâts avec 1 Att/round.",
+              },
+              {
+                term: "Saignement",
+                description:
+                  "Si une cible subit 2 dégâts (après armure) d'armes tranchantes dans le même tour, elle subit un saignement (1d6/2, ou 1d6 si elle saigne déjà).",
+              },
+            ],
+          },
+
+          {
+            name: "Batte de baseball cloutée",
+            subtitle: "Arme contondante",
+            price: "Bon marché",
+            stats: [
+              { label: "DÉG", value: "2d6+2" },
+              { label: "Att", value: "2" },
+              { label: "Type", value: "Contondante" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Clous",
+                description:
+                  "Les clous ajoutent +2 aux dégâts sur chaque coup réussi (déjà inclus dans les DÉG).",
+              },
+              {
+                term: "Mise au sol",
+                description:
+                  "Si les dégâts bruts sont supérieurs à COR + VOL de la cible, celle-ci est projetée au sol (immobile, malus lors de l'esquive, doit dépenser une action pour se relever).",
+              },
+            ],
+          },
+
+          {
+            name: "Masse lourde",
+            subtitle: "Arme contondante très lourde",
+            price: "Onéreux",
+            stats: [
+              { label: "DÉG", value: "4d6" },
+              { label: "Att", value: "1" },
+              { label: "Type", value: "Contondante" },
+              { label: "Main", value: "2" },
+              { label: "Diss", value: "Non" },
+            ],
+            notes: [
+              {
+                term: "Arme encombrante",
+                description:
+                  "Lourde et lente : L'utilisateur doit avoir COR >= 7, ou avoir des bras de gorilles. Sinon -5 jet de compétence.",
+              },
+              {
+                term: "Mise au sol",
+                description:
+                  "Si les dégâts bruts sont supérieurs à COR + VOL de la cible, celle-ci est projetée au sol (immobile, malus lors de l'esquive, doit dépenser une action pour se relever).",
+              },
+              {
+                term: "Broie l'armure",
+                description: "Perfore 1 point d'armure supplémentaire.",
+              },
+            ],
+          },
+        ],
+      },
+      { kind: "divider" },
       { kind: "heading", text: "Cyberware" },
       {
         kind: "items",
@@ -949,6 +1069,113 @@ export const RULE_TABS: RuleTab[] = [
                   "Si vous avez 4 ou moins en COR, vous infligez 2d6 de dégâts supplémentaires lorsque vous faites des jets de bagarre.",
               },
               { description: "Vous pouvez endommager des couverts en acier." },
+            ],
+          },
+          {
+            name: "Pompe sanguine",
+            price: "Onéreux",
+            humanityCost: "2d6",
+            notes: [
+              {
+                term: "Perfusion d'urgence",
+                description:
+                  "La première fois dans un combat où l'utilisateur passe sous 50% de ses PS, il récupère automatiquement 1d6 PS à la fin de son tour. Se recharge après une heure si le propriétaire a plus de 50% de ses PS.",
+              },
+              {
+                term: "Coagulation assistée",
+                description:
+                  "Simplifie le soin de saignement (premier secours SD 11, chirurgie SD 8).",
+              },
+            ],
+          },
+
+          {
+            name: "Yeux Kiroshi Optiques",
+            price: "Onéreux",
+            humanityCost: "2d6",
+            notes: [
+              {
+                description:
+                  "Remplace les deux yeux de chair par des optiques cybernétiques.",
+              },
+              {
+                term: "Visée assistée",
+                description:
+                  "+1 aux jets d'attaque à distance grâce au réticule projeté et au calcul de trajectoire.",
+              },
+              {
+                term: "Zoom",
+                description:
+                  "L'action de viser ne donne qu'un malus de -4 (à la place de -8) si le possesseur n'utilise pas son action de mouvement dans le tour.",
+              },
+            ],
+          },
+
+          {
+            name: "Amplificateur de réflexes",
+            price: "Très onéreux",
+            humanityCost: "3d6",
+            notes: [
+              {
+                description:
+                  "Traitement neural qui accélère le temps de réaction.",
+              },
+              {
+                term: "Initiative améliorée",
+                description: "+2 aux jets d'initiative.",
+              },
+              {
+                term: "Esquive réflexe",
+                description:
+                  "L'utilisateur peut tenter un jet d'esquive contre une attaque à distance même si sa DEX est inférieure à 8. Si l'utilisateur a déjà plus que 8 en DEX, alors il peut faire une esquive avec avantage. Se recharge après une heure.",
+              },
+            ],
+          },
+
+          {
+            name: "Camouflage thermo-optique",
+            price: "Très onéreux",
+            humanityCost: "3d6",
+            notes: [
+              {
+                description:
+                  "Revêtement sous-cutané qui plie la lumière autour du corps.",
+              },
+              {
+                term: "Occultation",
+                description:
+                  "S'active avec une action. Pendant 3 rounds, l'utilisateur est quasi invisible s'il reste discret : avantage marqué aux jets de furtivité, et les cibles ne peuvent pas l'esquiver s'il attaque depuis l'occultation. Attaquer ou subir des dégâts met fin à l'occultation à la fin du tour. Se recharge après 4 heures.",
+              },
+            ],
+          },
+
+          {
+            name: "Coprocesseur de correction",
+            price: "Très onéreux",
+            humanityCost: "3d6",
+            notes: [
+              {
+                description:
+                  "Coprocesseur de combat qui analyse un coup manqué et recalcule instantanément la trajectoire.",
+              },
+              {
+                term: "Seconde chance",
+                description:
+                  "Si une attaque (corps à corps, bagarre ou distance) est ratée, l'utilisateur peut immédiatement la retenter. Le nouveau jet d'attaque est de 12 + 1d10, indépendamment des CARAC et compétences. Se recharge après 2 heures.",
+              },
+            ],
+          },
+
+          {
+            name: "Assistant de ciblage",
+            price: "Très onéreux",
+            humanityCost: "3d6",
+            notes: [
+              {
+                term: "Repli sur le corps",
+                description:
+                  "Si une attaque effectuée avec l'action de visée est ratée, mais qu'elle aurait touché sans le malus de visée, l'attaque touche quand même la cible au corps (dégâts normaux, sans le bonus de la zone visée). Se recharge après 2 heures.",
+              },
             ],
           },
         ],
