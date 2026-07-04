@@ -955,4 +955,390 @@ export const RULE_TABS: RuleTab[] = [
       },
     ],
   },
+  {
+    id: "background",
+    label: "Background",
+    accent: "accent2",
+    blocks: [
+      { kind: "heading", text: "Origine culturelle" },
+      {
+        kind: "paragraph",
+        text:
+          "L'univers de Cyberpunk est multiculturel et international. Vous devez apprendre à vivre aux côtés de gens issus des quatre coins d'un monde fracturé et anarchique, sous peine de mourir la première fois que vous regarderez de travers la mauvaise personne. À vous de choisir si vos origines culturelles vous placent parmi les immigrants de Night City ou si elles indiquent simplement la région où votre famille se trouvait avant de s'implanter en ville. Lancez 2d6 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Votre origine culturelle"],
+        rows: [
+          ["2", "Amérique du Nord"],
+          ["3", "Amérique centrale"],
+          ["4", "Amérique du Sud"],
+          ["5", "Europe de l'Ouest"],
+          ["6", "Europe de l'Est"],
+          ["7", "Moyen-Orient et Afrique du Nord"],
+          ["8", "Afrique subsaharienne"],
+          ["9", "Asie du Sud"],
+          ["10", "Asie du Sud-Est"],
+          ["11", "Asie de l'Est"],
+          ["12", "Océanie et îles du Pacifique"],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Votre personnalité" },
+      {
+        kind: "paragraph",
+        text:
+          "Ce tableau définit votre caractère. Êtes-vous plutôt du genre à vous tenir à l'écart de la meute, à rester seul pour laisser votre esprit calculateur s'épanouir ? Êtes-vous un fêtard qui adore mettre la pagaille ? Un professionnel compétent et assuré qui a toujours un plan de secours ? Lancez 1d10 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Personnalité"],
+        rows: [
+          ["1", "Timide et réservée"],
+          ["2", "Rebelle, antisociale et violente"],
+          ["3", "Arrogante, prétentieuse et distante"],
+          ["4", "Lunatique, imprudente et têtue"],
+          ["5", "Maniaque, pointilleuse et nerveuse"],
+          ["6", "Stable et réfléchie"],
+          ["7", "Désordonnée et étourdie"],
+          ["8", "Discrète et manipulatrice"],
+          ["9", "Intellectuelle perdue dans son monde"],
+          ["10", "Chaleureuse et extravertie"],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Tenue et style" },
+      {
+        kind: "paragraph",
+        text:
+          "Dans Cyberpunk, votre apparence constitue pour la Rue un aperçu de ce que vous êtes. Vos vêtements et votre coupe de cheveux déterminent les relations que vous entretenez avec les autres, qu'elles soient bonnes ou mauvaises. Lancez 1d6 par colonne ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: [
+          "Jet",
+          "Style vestimentaire",
+          "Longueur et coupe de cheveux",
+          "Couleur et décoration",
+        ],
+        rows: [
+          [
+            "1",
+            "Entropie. Fonctionnel mais dépareillé. Une tenue dictée par la contrainte plutôt que le style.",
+            "Iroquoise",
+            "Multicolore",
+          ],
+          [
+            "2",
+            "Kitsch. Vous mettez en avant votre côté vintage avec des couleurs vives et des coupes tape-à-l'œil.",
+            "Courts et bien coiffés",
+            "Coloration vive",
+          ],
+          [
+            "3",
+            "Néomilitariste. Pratique et austère. Le confort passe avant le style.",
+            "Courts et décoiffés",
+            "Coloration naturelle",
+          ],
+          [
+            "4",
+            "Néokitsch. Un retour aux bons vieux classiques. L'ancien et le nouveau se mêlent, l'utile et le style fusionnent.",
+            "Coupés courts ou rasés",
+            "Mèches discrètes",
+          ],
+          [
+            "5",
+            "Âme nomade. Ces vêtements en cuir souvent synthétique sont robustes et élimés, à l'image de la vie nomade.",
+            "Longs et bien coiffés",
+            "Chevelure piquée de décorations",
+          ],
+          [
+            "6",
+            "Haute couture. Vous suivez les tendances du moment et les marques hors de prix, quelles qu'elles soient.",
+            "Longs et décoiffés",
+            "Vous changez tous les jours",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Valeur fondamentale" },
+      {
+        kind: "paragraph",
+        text:
+          "Quelle est votre valeur fondamentale ? Lancez 1d10 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Valeur fondamentale"],
+        rows: [
+          ["1", "L'argent"],
+          ["2", "L'honneur"],
+          ["3", "La parole donnée"],
+          ["4", "L'honnêteté"],
+          ["5", "Le savoir"],
+          ["6", "La vengeance"],
+          ["7", "L'amour"],
+          ["8", "Le pouvoir"],
+          ["9", "La famille"],
+          ["10", "L'amitié"],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Ce que vous pensez des gens" },
+      {
+        kind: "paragraph",
+        text:
+          "Que pensez-vous des gens en général ? Lancez 1d10 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Ce que vous pensez"],
+        rows: [
+          ["1", "Rien de spécial."],
+          ["2", "Vous appréciez tout le monde ou presque."],
+          ["3", "Vous détestez tout le monde ou presque."],
+          ["4", "Les gens sont des outils."],
+          [
+            "5",
+            "Les gens sont des obstacles qui se dressent sur votre chemin.",
+          ],
+          ["6", "Chaque individu est unique."],
+          ["7", "La plupart des gens sont des ordures."],
+          ["8", "Vous avez du mal à établir des liens profonds."],
+          ["9", "Vous tombez amoureux trop facilement."],
+          ["10", "Toutes les vies ont de la valeur."],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Origine sociale" },
+      {
+        kind: "paragraph",
+        text:
+          "Qui êtes-vous et d'où venez-vous ? Êtes-vous né avec une cuillère en argent dans la bouche ou avec un rat crevé dans le berceau ? Lancez 1d10 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Origine sociale"],
+        rows: [
+          [
+            "1",
+            "Cadres corporatistes. Famille riche, influente, qui engage des serviteurs et possède des maisons de luxe.",
+          ],
+          [
+            "2",
+            "Managers corporatistes. Qui dit famille aisée dit grande maison et vie tranquille. Visiblement, vous n'avez pas marché dans les traces de vos parents.",
+          ],
+          [
+            "3",
+            "Techniciens corporatistes. Entre les journées interminables et les conditions de travail difficiles, vous voyiez rarement vos parents, mais au moins vous aviez un toit au-dessus de la tête et le ventre plein.",
+          ],
+          [
+            "4",
+            "Meute de nomades. Vous viviez sur la route, au milieu des tentes et des caravanes. Vous avez appris à conduire et à vous défendre très tôt, mais au moins votre famille était toujours là pour vous.",
+          ],
+          [
+            "5",
+            "Gang. Selon le gang qui vous a élevé, vous faisiez partie de la famille ou vous n'étiez qu'une ressource à exploiter. Dans tous les cas, vous n'avez pas eu une vie facile.",
+          ],
+          [
+            "6",
+            "Habitants des zones de combat. La société a totalement abandonné l'endroit où vous avez grandi. C'était peut-être Pacifica. Votre quotidien était un combat permanent.",
+          ],
+          [
+            "7",
+            "Sans-abri. Vous viviez dans des bidonvilles, des villages de tente, des conteneurs à l'abandon. Puisque vous êtes toujours en vie, vous avez manifestement pigé les ficelles de la survie.",
+          ],
+          [
+            "8",
+            "Rats des mégastructures. Comme pas mal d'enfants, vous avez grandi dans l'appartement d'une mégastructure. Pas dans un immeuble de luxe en tout cas. Vous aviez droit à deux repas par jour.",
+          ],
+          [
+            "9",
+            "Edgerunners. Vos parents changeaient sans cesse d'endroit en fonction du boulot des gens qui s'occupaient de vous. Un jour vous dormiez dans un appartement de luxe, le lendemain vous étiez dans le coffre d'une voiture. Vous marchez dans les traces de vos protecteurs.",
+          ],
+          [
+            "10",
+            "Autre. Tout le monde ne rentre pas dans les catégories précédentes. Vos parents sont peut-être vendeurs, chauffeurs de taxi, objets de plaisir... Les possibilités sont infinies.",
+          ],
+        ],
+      },
+      { kind: "divider" },
+
+      { kind: "heading", text: "Environnement" },
+      {
+        kind: "paragraph",
+        text:
+          "Dans quel contexte avez-vous grandi ? Vous avez peut-être passé votre enfance dans un environnement qui n'a aucun rapport avec vos origines familiales. Racontez-nous pourquoi. Lancez 1d6 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Environnement"],
+        rows: [
+          ["1", "Vous écumiez la rue, libéré de la surveillance des adultes."],
+          [
+            "2",
+            "Dans une propriété, au sommet d'un gratte-ciel ou dans un lieu sécurisé d'un autre genre.",
+          ],
+          ["3", "Dans une meute nomade sans cesse en mouvement."],
+          [
+            "4",
+            "Au cœur de la zone de combat, dans un bâtiment effondré ou un squat.",
+          ],
+          [
+            "5",
+            "Dans une immense mégastructure contrôlée par une corpo ou par le gouvernement.",
+          ],
+          [
+            "6",
+            "Dans une habitation quelconque, par exemple une petite maison de Rancho Coronado ou un appartement en ville.",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Le tournant" },
+      {
+        kind: "paragraph",
+        text:
+          "Une existence paisible ne vous aurait pas poussé à devenir un Edgerunner. Quelle crise vous a frappé, vous ou votre famille, vous conduisant à votre situation actuelle ? Lancez 1d6 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Tournant"],
+        rows: [
+          [
+            "1",
+            "Vous avez tout perdu le jour où quelqu'un vous a trahi, vous ou votre famille.",
+          ],
+          [
+            "2",
+            "Vous ou votre famille avez été exilés ou chassés de votre foyer à cause de la situation politique ou pour d'autres raisons.",
+          ],
+          [
+            "3",
+            "Vous êtes le dernier survivant de la famille. Les autres sont décédés ou se sont volatilisés.",
+          ],
+          ["4", "Vous êtes victime d'une vendetta héréditaire ou personnelle."],
+          [
+            "5",
+            "Vous croulez sous les dettes. Vous ou votre famille êtes responsables de la situation.",
+          ],
+          [
+            "6",
+            "Vous êtes recherché par la police. Vous êtes coupable, ou peut-être pas. Dans tous les cas, soyez prudent.",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Votre but dans la vie" },
+      {
+        kind: "paragraph",
+        text:
+          "Les gens qui vivent sur le fil du rasoir ont souvent des rêves d'avenir. Pourquoi mettez-vous votre vie en danger en acceptant des contrats dangereux ? Quel est votre but dans la vie ? Lancez 1d6 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Votre but"],
+        rows: [
+          ["1", "Vous devez réparer une erreur que vous avez commise."],
+          ["2", "Vous avez soif de pouvoir et de domination."],
+          ["3", "Vous voulez toucher le pactole pour prendre votre retraite."],
+          ["4", "Vous voulez laver votre passé entaché."],
+          ["5", "L'argent et la célébrité, choomba !"],
+          ["6", "Protéger les gens que vous aimez par tous les moyens."],
+        ],
+      },
+      { kind: "divider" },
+
+      { kind: "heading", text: "Vos amis" },
+      {
+        kind: "paragraph",
+        text:
+          "Tout n'est pas noir. Vous êtes parfois en contact avec des gens qui veillent sur vous. Lancez 1d6. Sur 1, vous n'avez pas vraiment d'amis sur lesquels compter. De 2 à 5, vous avez un ami fidèle. Sur 6, vous en avez deux.",
+      },
+      {
+        kind: "paragraph",
+        text:
+          "Si vous avez des amis, lancez un dé pour définir votre relation, leur rôle et les cercles dans lesquels ils évoluent. Vous pouvez dresser le portrait de vos amis dès maintenant en discutant avec le MJ, ou vous laisser le champ libre pour plus tard, quand le sujet prendra de l'importance.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Quelles sont vos relations ?"],
+        rows: [
+          ["1", "Un ancien amour avec lequel vous êtes resté en bons termes."],
+          ["2", "Une personne avec laquelle vous avez grandi."],
+          ["3", "Un mentor ou une figure parentale."],
+          ["4", "Votre ancien boss qui vous tient en affection."],
+          ["5", "Un vieil ennemi ou rival avec lequel vous avez fait la paix."],
+          [
+            "6",
+            "Quelqu'un qui partage votre passion. Vous vous y adonnez ensemble.",
+          ],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Vos ennemis" },
+      {
+        kind: "paragraph",
+        text:
+          "Tôt ou tard, vous allez froisser quelqu'un, alors autant savoir qui sont vos ennemis. Lancez 1d6. Sur 1, vous n'avez pas d'ennemi à proprement parler. De 2 à 5, vous en avez un. Sur 6, vous en avez deux.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Quelles sont vos relations ?"],
+        rows: [
+          ["1", "Une ancienne amitié ou un amour passé."],
+          ["2", "Un ennemi d'enfance."],
+          ["3", "Un ancien boss qui vous a trahi."],
+          ["4", "Un membre de votre famille."],
+          ["5", "Un ancien partenaire ou collègue de travail."],
+          ["6", "Une figure énigmatique. Vous doutez de son existence."],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Rôle et cercle de fréquentation" },
+      {
+        kind: "paragraph",
+        text:
+          "Pour chaque ami et ennemi que vous avez, lancez 1d10 par colonne : une fois pour connaître leur rôle, une autre fois pour connaître leur cercle de fréquentation.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Rôle", "Cercle de fréquentations"],
+        rows: [
+          ["1", "Aucun", "Habitant d'une zone de combat"],
+          ["2", "Fixer", "Corporatiste ambitieux"],
+          ["3", "MedTech", "Bande de cyberpunks"],
+          ["4", "Techie", "Urgentiste/personnel médical"],
+          ["5", "Aucun", "Gang"],
+          ["6", "Pilote", "Employé du gouvernement"],
+          ["7", "Rockeur", "NCPD"],
+          ["8", "Solo", "Professionnel des médias et du divertissement"],
+          ["9", "Netrunner", "Membre d'une meute nomade"],
+          ["10", "Aucun", "Employé de vente"],
+        ],
+      },
+      { kind: "divider" },
+      { kind: "heading", text: "Votre tragédie amoureuse" },
+      {
+        kind: "paragraph",
+        text:
+          "Peu nous importent les histoires qui se finissent bien, nous voulons tout savoir sur les monstres qui vous ont arraché le cœur. Lancez 1d6 ou choisissez.",
+      },
+      {
+        kind: "table",
+        headers: ["Jet", "Que s'est-il passé ?"],
+        rows: [
+          ["1", "Votre amour est mort dans un accident ou a été assassiné."],
+          ["2", "Votre amour a disparu dans des circonstances mystérieuses."],
+          [
+            "3",
+            "Une vendetta ou vos objectifs personnels ont eu raison de votre relation.",
+          ],
+          ["4", "Votre amour a été emprisonné ou exilé."],
+          ["5", "Votre amour vous a quitté pour quelqu'un d'autre."],
+          ["6", "Vous n'avez pas eu d'amour, ce n'est pas votre truc."],
+        ],
+      },
+    ],
+  },
 ];
