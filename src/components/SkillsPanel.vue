@@ -19,7 +19,7 @@ const skillList = computed(() => {
       (skillStat.value === 'ALL' || st === skillStat.value) &&
       (!q || name.toLowerCase().includes(q)),
   ).map(([name, st, description]) => {
-    const base = store.char.stats[st] || 0
+    const base = st === 'EMP' ? store.empathyEffective : (store.char.stats[st] || 0)
     const level = store.char.skills[name] || 0
     return {
       name, statKey: st, base, level, total: base + level, description,

@@ -26,7 +26,7 @@ const store = useCharacterStore()
       <div
         v-for="d in STAT_DEFS"
         :key="d.key"
-        class="border border-line bg-inset/25 p-3 pb-3.5"
+        class="border border-line bg-inset/25 p-3 pb-3.5 h-40 flex flex-col"
       >
         <div class="flex items-baseline justify-between">
           <span class="flex items-center gap-1.5">
@@ -50,7 +50,37 @@ const store = useCharacterStore()
             }"
           ></div>
         </div>
-        <div class="flex gap-1.5">
+        <div
+          v-if="d.key === 'CHA'"
+          class="mb-[9px] flex items-center justify-between font-mono text-[10px] tracking-[0.1em] text-dim uppercase"
+        >
+          <span>Actuelle</span>
+          <span class="flex items-center gap-1">
+            <button
+              class="h-4 w-4 cursor-pointer border border-line bg-inset/40 text-[10px] leading-none text-txt hover:border-accent hover:text-accent"
+              @click="store.setChance(-1)"
+            >
+              −
+            </button>
+            <span class="w-4 text-center font-mono text-xs font-semibold text-txt">{{
+              store.chanceNow
+            }}</span>
+            <button
+              class="h-4 w-4 cursor-pointer border border-line bg-inset/40 text-[10px] leading-none text-txt hover:border-accent hover:text-accent"
+              @click="store.setChance(1)"
+            >
+              +
+            </button>
+          </span>
+        </div>
+        <div
+          v-else-if="d.key === 'EMP'"
+          class="mb-[9px] flex items-center justify-between font-mono text-[10px] tracking-[0.1em] text-dim uppercase"
+        >
+          <span>Empathie réelle</span>
+          <span class="font-mono text-xs font-semibold text-accent">{{ store.empathyEffective }}</span>
+        </div>
+        <div class="flex gap-1.5 mt-auto">
           <button
             class="flex-1 cursor-pointer border border-line bg-inset/40 py-1 font-mono text-sm font-semibold text-txt hover:border-accent hover:text-accent"
             @click="store.setStat(d.key, -1)"

@@ -50,6 +50,7 @@ export interface Character {
   armorHead: number;
   armorBody: number;
   humanity: number;
+  chance: number;
   eddies: number;
   weapons: Weapon[];
   cyberware: Cyberware[];
@@ -76,6 +77,7 @@ function defaultCharacter(): Character {
     armorHead: 7,
     armorBody: 7,
     humanity: 40,
+    chance: 5,
     eddies: 500,
     weapons: [],
     cyberware: [],
@@ -146,6 +148,13 @@ export const useCharacterStore = defineStore("character", () => {
       : 0
   );
 
+  const chanceMax = computed(() => char.stats["CHA"] || 0);
+  const chanceNow = computed(() =>
+    Math.max(0, Math.min(chanceMax.value, char.chance || 0))
+  );
+
+  const empathyEffective = computed(() => Math.ceil(humanityNow.value / 10));
+
   const idCode = computed(() => {
     const base = (char.alias || char.nom || "V")
       .toUpperCase()
@@ -195,6 +204,19 @@ export const useCharacterStore = defineStore("character", () => {
     char.humanity = Math.max(
       0,
       Math.min(humanityMax.value, parseInt(String(val)) || 0),
+    );
+  }
+
+  function setChance(delta: number) {
+    char.chance = Math.max(
+      0,
+      Math.min(chanceMax.value, (char.chance || 0) + delta),
+    );
+  }
+  function setChanceVal(val: string | number) {
+    char.chance = Math.max(
+      0,
+      Math.min(chanceMax.value, parseInt(String(val)) || 0),
     );
   }
 
@@ -314,6 +336,9 @@ export const useCharacterStore = defineStore("character", () => {
     humanityMax,
     humanityNow,
     humanityPct,
+    chanceMax,
+    chanceNow,
+    empathyEffective,
     idCode,
     setStat,
     applyRoleDefaults,
@@ -323,6 +348,8 @@ export const useCharacterStore = defineStore("character", () => {
     setArmor,
     setHumanity,
     setHumanityVal,
+    setChance,
+    setChanceVal,
     setEddies,
     setBg,
     addWeapon,

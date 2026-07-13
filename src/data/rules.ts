@@ -121,11 +121,6 @@ export const RULE_TABS: RuleTab[] = [
             description:
               "En prenant 4 fois plus de temps que nécessaire pour une action, vous obtenez un bonus de +1.",
           },
-          {
-            term: "Compter sur la Chance",
-            description:
-              "Chaque point de Chance dépensé donne +1 au jet de compétence.",
-          },
         ],
       },
     ],
@@ -1212,7 +1207,7 @@ export const RULE_TABS: RuleTab[] = [
               {
                 term: "Surcadence réseau",
                 description:
-                  "S'active avec une action. Pendant 3 tours, l'utilisateur peut disposer d'un actions virtuelle supplémentaire. Se recharge après un repos long.",
+                  "S'active avec une action. Pendant 3 tours, l'utilisateur peut disposer d'une action virtuelle supplémentaire. Se recharge après un repos long.",
               },
               {
                 term: "Surchauffe neurale",

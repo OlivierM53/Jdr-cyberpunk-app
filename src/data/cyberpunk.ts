@@ -66,7 +66,7 @@ export const STAT_DEFS: StatDef[] = [
     key: "CHA",
     name: "Chance",
     description:
-      "Vous obtenez autant de points de chance que cette stat. Chaque point de chance peut être consommé pour avoir un bonus de 1 à un jet de compétence.",
+      "Vous disposez d'autant de points de Chance que cette stat. En cas d'échec à un jet avec une marge d'échec ≤ CHA/2 (arrondi au supérieur), vous pouvez brûler un point de Chance pour transformer l'échec en réussite. La récupération est lente (1-2 points par session) et vous ne pouvez jamais avoir plus de points de Chance que votre stat investie.",
   },
   {
     key: "MOUV",
